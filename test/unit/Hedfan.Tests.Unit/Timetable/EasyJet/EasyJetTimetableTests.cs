@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 using FluentAssertions;
 
@@ -14,6 +15,21 @@ namespace Hedfan.Tests.Unit.Timetable.EasyJet
 {
     public class EasyJetTimetableTests
     {
+        [Fact]
+        public void DeserializeObjectShouldDeserializeEasyJetAirports()
+        {
+            var routeData = Regex.Match(Resources.EasyJetRoutePicker, "\\[{.*}\\]").Value;
+            var routePicker = JsonConvert.DeserializeObject<IEnumerable<EasyJetOriginAirport>>(routeData);
+
+            var originLuton = routePicker.First(x => x.Iata == "LTN");
+            var destinationGlasgow = originLuton.ConnectedTo.First(x => x.Iata == "GLA");
+
+            originLuton.Name.Should().Be("London Luton");
+            originLuton.AbbreviatedName.Should().Be("London Luton");
+            destinationGlasgow.Name.Should().Be("Glasgow");
+            destinationGlasgow.TimetableUrl.Should().Be("/en/cheap-flights/london-luton/glasgow");
+        }
+
         [Fact]
         public void DeserializeObjectShouldDeserializeEasyJetTimetableCallbackBrsEdi()
         {
@@ -55,6 +71,25 @@ namespace Hedfan.Tests.Unit.Timetable.EasyJet
             timetable.ReturnLegs.ElementAt(3).Days.ElementAt(12).Flights.ElementAt(0).LocalDepTime.Should().Be(new DateTime(2020, 7, 13, 7, 0, 0));
             timetable.ReturnLegs.ElementAt(3).Days.ElementAt(12).Flights.ElementAt(0).Price.Should().Be(28.99m);
         }
+    }
+
+    public abstract class EasyJetAirport
+    {
+        public string Iata { get; set; }
+
+        public string Name { get; set; }
+    }
+
+    public class EasyJetDestinationAirport : EasyJetAirport
+    {
+        public string TimetableUrl { get; set; }
+    }
+
+    public class EasyJetOriginAirport : EasyJetAirport
+    {
+        public string AbbreviatedName { get; set; }
+
+        public IEnumerable<EasyJetDestinationAirport> ConnectedTo { get; set; }
     }
 
     public class EasyJetTimetable
