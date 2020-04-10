@@ -61,6 +61,15 @@ namespace Hedfan.Tests.Unit.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to     new Controls.RoutePicker.RoutePickerControl($jq(&apos;.routePickerContainer&apos;), [{&quot;Iata&quot;:&quot;AAR&quot;,&quot;Name&quot;:&quot;Aarhus&quot;,&quot;AbbreviatedName&quot;:&quot;Aarhus&quot;,&quot;ConnectedTo&quot;:[{&quot;Iata&quot;:&quot;TXL&quot;,&quot;Name&quot;:&quot;Berlin Tegel&quot;,&quot;TimetableUrl&quot;:&quot;/en/cheap-flights/aarhus/berlin-tegel&quot;}]},{&quot;Iata&quot;:&quot;ABZ&quot;,&quot;Name&quot;:&quot;Aberdeen&quot;,&quot;AbbreviatedName&quot;:&quot;Aberdeen&quot;,&quot;ConnectedTo&quot;:[{&quot;Iata&quot;:&quot;GVA&quot;,&quot;Name&quot;:&quot;Geneva&quot;,&quot;TimetableUrl&quot;:&quot;/en/cheap-flights/aberdeen/geneva&quot;},{&quot;Iata&quot;:&quot;LTN&quot;,&quot;Name&quot;:&quot;London Luton&quot;,&quot;TimetableUrl&quot;:&quot;/en/cheap-flights/aberdeen/london-luton&quot;}]},{&quot;Iata&quot;:&quot;AGA&quot; [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string EasyJetRoutePicker {
+            get {
+                return ResourceManager.GetString("EasyJetRoutePicker", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {&quot;outboundLeg&quot;:[{&quot;monthDate&quot;:&quot;2020-04-01&quot;,&quot;shortMonthName&quot;:&quot;Apr&quot;,&quot;cheapestPrice&quot;:0.0,&quot;days&quot;:[{&quot;date&quot;:&quot;2020-04-01&quot;,&quot;dayInitial&quot;:&quot;W&quot;,&quot;flights&quot;:[null],&quot;filterPrices&quot;:[0.0,0.0,0.0]},{&quot;date&quot;:&quot;2020-04-02&quot;,&quot;dayInitial&quot;:&quot;T&quot;,&quot;flights&quot;:[null],&quot;filterPrices&quot;:[0.0,0.0,0.0]},{&quot;date&quot;:&quot;2020-04-03&quot;,&quot;dayInitial&quot;:&quot;F&quot;,&quot;flights&quot;:[null],&quot;filterPrices&quot;:[0.0,0.0,0.0]},{&quot;date&quot;:&quot;2020-04-04&quot;,&quot;dayInitial&quot;:&quot;S&quot;,&quot;flights&quot;:[null],&quot;filterPrices&quot;:[0.0,0.0,0.0]},{&quot;date&quot;:&quot;2020-04-05&quot;,&quot;dayInitial&quot;:&quot;S&quot;,&quot;flights&quot;:[null],&quot;filterPrices&quot;:[0.0,0.0, [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string EasyJetTimetableCallbackLtnGla {
