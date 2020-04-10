@@ -1,9 +1,8 @@
-using System;
 using Xunit;
 
-namespace Hedfan.Tests.Unit
+namespace Hedfan.Tests.Unit.Timetable.EasyJet
 {
-    public class UnitTest1
+    public class EasyJetTimetableTests
     {
         [Fact]
         public void Test1()
