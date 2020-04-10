@@ -16,6 +16,25 @@ namespace Hedfan.Tests.Unit.Timetable.EasyJet
     public class EasyJetTimetableTests
     {
         [Fact]
+        public void CanRemoveReturnLegsFromEasyJetAirports()
+        {
+            var routePicker = JsonConvert.DeserializeObject<List<EasyJetOriginAirport>>(Regex.Match(Resources.EasyJetRoutePicker, "\\[{.*}\\]").Value);
+
+            routePicker.First(x => x.Iata == "LTN").ConnectedTo.FirstOrDefault(x => x.Iata == "GLA").Should().NotBeNull();
+
+            foreach (var origin in routePicker)
+            {
+                foreach (var destination in routePicker.Where(x => origin.ConnectedTo.Select(dest => dest.Iata).Contains(x.Iata)))
+                {
+                    var connectedTo = destination.ConnectedTo as EasyJetDestinationAirport[] ?? destination.ConnectedTo.ToArray();
+                    destination.ConnectedTo = connectedTo.Except(connectedTo.Where(x => x.Iata == origin.Iata)).ToArray();
+                }
+            }
+
+            routePicker.First(x => x.Iata == "LTN").ConnectedTo.FirstOrDefault(x => x.Iata == "GLA").Should().BeNull();
+        }
+
+        [Fact]
         public void DeserializeObjectShouldDeserializeEasyJetAirports()
         {
             var routeData = Regex.Match(Resources.EasyJetRoutePicker, "\\[{.*}\\]").Value;
