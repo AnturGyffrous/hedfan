@@ -60,12 +60,12 @@ namespace Hedfan.Tests.Unit.Timetable.EasyJet
     public class EasyJetTimetable
     {
         [JsonProperty("outboundLeg")]
-        public IEnumerable<Month> OutboundLegs { get; set; }
+        public IEnumerable<EasyJetMonth> OutboundLegs { get; set; }
 
         public bool PricesAvailable { get; set; }
 
         [JsonProperty("returnLeg")]
-        public IEnumerable<Month> ReturnLegs { get; set; }
+        public IEnumerable<EasyJetMonth> ReturnLegs { get; set; }
 
         [JsonProperty("surchargeOutbound_oneWay")]
         public decimal SurchargeOutboundOneWay { get; set; }
@@ -74,18 +74,18 @@ namespace Hedfan.Tests.Unit.Timetable.EasyJet
         public decimal SurchargePerLegRoundTrip { get; set; }
     }
 
-    public class Month
+    public class EasyJetMonth
     {
         public decimal CheapestPrice { get; set; }
 
-        public IEnumerable<Day> Days { get; set; }
+        public IEnumerable<EasyJetDay> Days { get; set; }
 
         public DateTime MonthDate { get; set; }
 
         public string ShortMonthName { get; set; }
     }
 
-    public class Day
+    public class EasyJetDay
     {
         public DateTime Date { get; set; }
 
@@ -93,10 +93,10 @@ namespace Hedfan.Tests.Unit.Timetable.EasyJet
 
         public IEnumerable<decimal> FilterPrices { get; set; }
 
-        public IEnumerable<Flight> Flights { get; set; }
+        public IEnumerable<EasyJetFlight> Flights { get; set; }
     }
 
-    public class Flight
+    public class EasyJetFlight
     {
         [JsonProperty("flightNum")]
         public int FlightNumber { get; set; }
