@@ -27,6 +27,20 @@ namespace Hedfan.Tests.Unit.Schedules.Airports
         private readonly IFixture _fixture;
 
         [Fact]
+        public void DisposeShouldNotThrowEvenAfterTheReaderHasBeenDisposed()
+        {
+            // Arrange
+            var reader = _fixture.Create<AirportReader>();
+            reader.Dispose();
+
+            // Act
+            Action act = () => reader.Dispose();
+
+            // Assert
+            act.Should().NotThrow();
+        }
+
+        [Fact]
         public void ReadShouldReturnFalseWhenNoMoreAirportsCanBeReadFromTheStream()
         {
             // Arrange
