@@ -3,6 +3,8 @@
 using AutoFixture;
 using AutoFixture.AutoMoq;
 
+using FluentAssertions;
+
 using Hedfan.Schedules.Airports;
 
 using Xunit;
@@ -30,6 +32,7 @@ namespace Hedfan.Tests.Unit.Schedules.Airports
             var airport = await airportStore.FindByIataAsync(_fixture.Create<string>());
 
             // Assert
+            airport.Should().NotBeNull();
         }
     }
 }
