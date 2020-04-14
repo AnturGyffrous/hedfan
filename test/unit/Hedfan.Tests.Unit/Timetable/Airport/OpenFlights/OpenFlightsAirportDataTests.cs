@@ -1,6 +1,7 @@
 ﻿using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Text;
 
 using CsvHelper;
 using CsvHelper.Configuration.Attributes;
@@ -18,7 +19,7 @@ namespace Hedfan.Tests.Unit.Timetable.Airport.OpenFlights
         [Fact]
         public void GetRecordsShouldReadDataFromStream()
         {
-            using var reader = new StringReader(Resources.OpenFlightsAirportDataSample);
+            using var reader = new StringReader(Encoding.UTF8.GetString(Resources.OpenFlightsAirportDataSample));
             using var csv = new CsvReader(reader, CultureInfo.InvariantCulture);
             csv.Configuration.HasHeaderRecord = false;
             var records = csv.GetRecords<OpenFlightsAirport>().ToList();

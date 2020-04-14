@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 using AutoFixture;
@@ -22,7 +21,7 @@ namespace Hedfan.Tests.Unit.Schedules.Airports
         {
             _fixture = new Fixture();
 
-            _fixture.Inject<Stream>(new MemoryStream(Encoding.UTF8.GetBytes(Resources.OpenFlightsAirportDataSample)));
+            _fixture.Inject<Stream>(new MemoryStream(Resources.OpenFlightsAirportDataSample));
             _fixture.Register<AirportReader>(() => _fixture.Create<OpenFlightsAirportReader>());
         }
 
