@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Linq;
 using System.Text;
 
 using AutoFixture;
@@ -23,6 +24,20 @@ namespace Hedfan.Tests.Unit.Schedules.Airports
         }
 
         private readonly IFixture _fixture;
+
+        [Fact]
+        public void ReadShouldReturnFalseWhenNoMoreAirportsCanBeReadFromTheStream()
+        {
+            // Arrange
+            using var reader = _fixture.Create<AirportReader>();
+            Enumerable.Repeat(reader, 9).ToList().ForEach(x => x.Read());
+
+            // Act
+            var result = reader.Read();
+
+            // Assert
+            result.Should().BeFalse();
+        }
 
         [Fact]
         public void ReadShouldReturnTrueWhenAnotherAirportCanBeReadFromTheStream()
