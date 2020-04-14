@@ -1,9 +1,18 @@
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Hedfan.Schedules.Airports
 {
     public class OpenFlightsAirportStore : IAirportStore
     {
-        public Task<Airport> FindByIataAsync(string iata) => throw new System.NotImplementedException();
+        private readonly IEnumerable<Airport> _airports;
+
+        public OpenFlightsAirportStore(IEnumerable<Airport> airports)
+        {
+            _airports = airports;
+        }
+
+        public Task<Airport> FindByIataAsync(string iata) => Task.FromResult(_airports.FirstOrDefault(x => x.Iata == iata));
     }
 }
