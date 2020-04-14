@@ -82,6 +82,26 @@ namespace Hedfan.Schedules.Airports
                 })
                 .Select(builder => new Airport(builder));
 
+        public override async IAsyncEnumerable<Airport> GetAirportsAsync()
+        {
+            await foreach (var airport in _csvReader.GetRecordsAsync<OpenFlightsAirport>())
+            {
+                yield return new Airport(new AirportBuilder
+                {
+                    Name = airport.Name,
+                    City = airport.City,
+                    Country = airport.Country,
+                    Iata = airport.Iata,
+                    Icao = airport.Icao,
+                    Latitude = airport.Latitude,
+                    Longitude = airport.Longitude,
+                    Altitude = airport.Altitude,
+                    Timezone = airport.Timezone,
+                    Source = airport.Source
+                });
+            }
+        }
+
         public override bool Read()
         {
             if (_disposed)

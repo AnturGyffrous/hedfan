@@ -20,6 +20,8 @@ namespace Hedfan.Schedules.Airports
 
         public abstract IEnumerable<Airport> GetAirports();
 
+        public abstract IAsyncEnumerable<Airport> GetAirportsAsync();
+
         public abstract bool Read();
 
         public abstract Task<bool> ReadAsync();

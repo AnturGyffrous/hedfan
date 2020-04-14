@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -63,6 +64,23 @@ namespace Hedfan.Tests.Unit.Schedules.Airports
             airport.Altitude.Should().Be(ExampleAirports.LondonLuton.Altitude);
             airport.Timezone.Should().Be(ExampleAirports.LondonLuton.Timezone);
             airport.Source.Should().Be(ExampleAirports.LondonLuton.Source);
+        }
+
+        [Fact]
+        public async Task GetAirportsAsyncShouldReturnAllAirports()
+        {
+            // Arrange
+            var reader = _fixture.Create<AirportReader>();
+            var airports = new List<Airport>();
+
+            // Act
+            await foreach (var airport in reader.GetAirportsAsync())
+            {
+                airports.Add(airport);
+            }
+
+            // Assert
+            airports.Should().HaveCount(9);
         }
 
         [Fact]
