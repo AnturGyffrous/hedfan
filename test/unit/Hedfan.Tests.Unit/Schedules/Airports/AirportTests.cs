@@ -23,6 +23,20 @@ namespace Hedfan.Tests.Unit.Schedules.Airports
         private readonly IFixture _fixture;
 
         [Fact]
+        public void EqualsShouldReturnTrueIfTheReferencesAreDifferentButThePropertiesAreTheSame()
+        {
+            // Arrange
+            var airport1 = _fixture.Create<Airport>();
+            var airport2 = _fixture.Create<Airport>();
+
+            // Act
+            var result = airport1.Equals(airport2);
+
+            // Assert
+            result.Should().BeTrue();
+        }
+
+        [Fact]
         public void EqualsShouldReturnTrueIfTheReferencesAreTheSame()
         {
             // Arrange
