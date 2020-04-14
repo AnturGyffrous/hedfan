@@ -14,7 +14,7 @@ namespace Hedfan.Tests.Unit.Schedules.Airports
         {
             _fixture = new Fixture();
 
-            _fixture.Customize<Airport>(c => c
+            _fixture.Customize<AirportBuilder>(c => c
                 .With(x => x.Name, "London Luton Airport")
                 .With(x => x.City, "London")
                 .With(x => x.Country, "United Kingdom")
@@ -32,6 +32,9 @@ namespace Hedfan.Tests.Unit.Schedules.Airports
 
         private class AirportSubClass : Airport
         {
+            public AirportSubClass(AirportBuilder builder) : base(builder)
+            {
+            }
         }
 
         [Fact]
@@ -39,7 +42,7 @@ namespace Hedfan.Tests.Unit.Schedules.Airports
         {
             // Arrange
             var airport1 = _fixture.Create<Airport>();
-            var airport2 = new AirportSubClass
+            var airport2 = new AirportSubClass(new AirportBuilder
             {
                 Name = "Luton International Airport",
                 City = airport1.City,
@@ -51,7 +54,7 @@ namespace Hedfan.Tests.Unit.Schedules.Airports
                 Altitude = airport1.Altitude,
                 Timezone = airport1.Timezone,
                 Source = airport1.Source
-            };
+            });
 
             // Act
             var result = airport1 == airport2;
@@ -79,7 +82,7 @@ namespace Hedfan.Tests.Unit.Schedules.Airports
         {
             // Arrange
             var airport1 = _fixture.Create<Airport>();
-            var airport2 = new AirportSubClass
+            var airport2 = new AirportSubClass(new AirportBuilder
             {
                 Name = airport1.Name,
                 City = airport1.City,
@@ -91,7 +94,7 @@ namespace Hedfan.Tests.Unit.Schedules.Airports
                 Altitude = 83,
                 Timezone = airport1.Timezone,
                 Source = airport1.Source
-            };
+            });
 
             // Act
             var result = airport1.Equals(airport2);
@@ -105,7 +108,7 @@ namespace Hedfan.Tests.Unit.Schedules.Airports
         {
             // Arrange
             var airport1 = _fixture.Create<Airport>();
-            var airport2 = new AirportSubClass
+            var airport2 = new AirportSubClass(new AirportBuilder
             {
                 Name = airport1.Name,
                 City = "Luton",
@@ -117,7 +120,7 @@ namespace Hedfan.Tests.Unit.Schedules.Airports
                 Altitude = airport1.Altitude,
                 Timezone = airport1.Timezone,
                 Source = airport1.Source
-            };
+            });
 
             // Act
             var result = airport1.Equals(airport2);
@@ -131,7 +134,7 @@ namespace Hedfan.Tests.Unit.Schedules.Airports
         {
             // Arrange
             var airport1 = _fixture.Create<Airport>();
-            var airport2 = new AirportSubClass
+            var airport2 = new AirportSubClass(new AirportBuilder
             {
                 Name = airport1.Name,
                 City = airport1.City,
@@ -143,7 +146,7 @@ namespace Hedfan.Tests.Unit.Schedules.Airports
                 Altitude = airport1.Altitude,
                 Timezone = airport1.Timezone,
                 Source = airport1.Source
-            };
+            });
 
             // Act
             var result = airport1.Equals(airport2);
@@ -157,7 +160,7 @@ namespace Hedfan.Tests.Unit.Schedules.Airports
         {
             // Arrange
             var airport1 = _fixture.Create<Airport>();
-            var airport2 = new AirportSubClass
+            var airport2 = new AirportSubClass(new AirportBuilder
             {
                 Name = airport1.Name,
                 City = airport1.City,
@@ -169,7 +172,7 @@ namespace Hedfan.Tests.Unit.Schedules.Airports
                 Altitude = airport1.Altitude,
                 Timezone = airport1.Timezone,
                 Source = airport1.Source
-            };
+            });
 
             // Act
             var result = airport1.Equals(airport2);
@@ -183,7 +186,7 @@ namespace Hedfan.Tests.Unit.Schedules.Airports
         {
             // Arrange
             var airport1 = _fixture.Create<Airport>();
-            var airport2 = new AirportSubClass
+            var airport2 = new AirportSubClass(new AirportBuilder
             {
                 Name = airport1.Name,
                 City = airport1.City,
@@ -195,7 +198,7 @@ namespace Hedfan.Tests.Unit.Schedules.Airports
                 Altitude = airport1.Altitude,
                 Timezone = airport1.Timezone,
                 Source = airport1.Source
-            };
+            });
 
             // Act
             var result = airport1.Equals(airport2);
@@ -209,7 +212,7 @@ namespace Hedfan.Tests.Unit.Schedules.Airports
         {
             // Arrange
             var airport1 = _fixture.Create<Airport>();
-            var airport2 = new AirportSubClass
+            var airport2 = new AirportSubClass(new AirportBuilder
             {
                 Name = airport1.Name,
                 City = airport1.City,
@@ -221,7 +224,7 @@ namespace Hedfan.Tests.Unit.Schedules.Airports
                 Altitude = airport1.Altitude,
                 Timezone = airport1.Timezone,
                 Source = airport1.Source
-            };
+            });
 
             // Act
             var result = airport1.Equals(airport2);
@@ -235,7 +238,7 @@ namespace Hedfan.Tests.Unit.Schedules.Airports
         {
             // Arrange
             var airport1 = _fixture.Create<Airport>();
-            var airport2 = new AirportSubClass
+            var airport2 = new AirportSubClass(new AirportBuilder
             {
                 Name = airport1.Name,
                 City = airport1.City,
@@ -247,7 +250,7 @@ namespace Hedfan.Tests.Unit.Schedules.Airports
                 Altitude = airport1.Altitude,
                 Timezone = airport1.Timezone,
                 Source = airport1.Source
-            };
+            });
 
             // Act
             var result = airport1.Equals(airport2);
@@ -261,7 +264,7 @@ namespace Hedfan.Tests.Unit.Schedules.Airports
         {
             // Arrange
             var airport1 = _fixture.Create<Airport>();
-            var airport2 = new AirportSubClass
+            var airport2 = new AirportSubClass(new AirportBuilder
             {
                 Name = "Luton International Airport",
                 City = airport1.City,
@@ -273,7 +276,7 @@ namespace Hedfan.Tests.Unit.Schedules.Airports
                 Altitude = airport1.Altitude,
                 Timezone = airport1.Timezone,
                 Source = airport1.Source
-            };
+            });
 
             // Act
             var result = airport1.Equals(airport2);
@@ -287,7 +290,7 @@ namespace Hedfan.Tests.Unit.Schedules.Airports
         {
             // Arrange
             var airport1 = _fixture.Create<Airport>();
-            var airport2 = new AirportSubClass
+            var airport2 = new AirportSubClass(new AirportBuilder
             {
                 Name = airport1.Name,
                 City = airport1.City,
@@ -299,7 +302,7 @@ namespace Hedfan.Tests.Unit.Schedules.Airports
                 Altitude = airport1.Altitude,
                 Timezone = airport1.Timezone,
                 Source = "Other"
-            };
+            });
 
             // Act
             var result = airport1.Equals(airport2);
@@ -313,7 +316,7 @@ namespace Hedfan.Tests.Unit.Schedules.Airports
         {
             // Arrange
             var airport1 = _fixture.Create<Airport>();
-            var airport2 = new AirportSubClass
+            var airport2 = new AirportSubClass(new AirportBuilder
             {
                 Name = airport1.Name,
                 City = airport1.City,
@@ -325,7 +328,7 @@ namespace Hedfan.Tests.Unit.Schedules.Airports
                 Altitude = airport1.Altitude,
                 Timezone = "America/Argentina/Ushuaia",
                 Source = airport1.Source
-            };
+            });
 
             // Act
             var result = airport1.Equals(airport2);
@@ -339,7 +342,7 @@ namespace Hedfan.Tests.Unit.Schedules.Airports
         {
             // Arrange
             var airport1 = _fixture.Create<Airport>();
-            var airport2 = new AirportSubClass
+            var airport2 = new AirportSubClass(new AirportBuilder
             {
                 Name = airport1.Name,
                 City = airport1.City,
@@ -351,7 +354,7 @@ namespace Hedfan.Tests.Unit.Schedules.Airports
                 Altitude = airport1.Altitude,
                 Timezone = airport1.Timezone,
                 Source = airport1.Source
-            };
+            });
 
             // Act
             var result = airport1.Equals(airport2);
@@ -423,7 +426,7 @@ namespace Hedfan.Tests.Unit.Schedules.Airports
         {
             // Arrange
             var airport1 = _fixture.Create<Airport>();
-            var airport2 = new AirportSubClass
+            var airport2 = new AirportSubClass(new AirportBuilder
             {
                 Name = "Luton International Airport",
                 City = airport1.City,
@@ -435,7 +438,7 @@ namespace Hedfan.Tests.Unit.Schedules.Airports
                 Altitude = airport1.Altitude,
                 Timezone = airport1.Timezone,
                 Source = airport1.Source
-            };
+            });
 
             // Act
             var result = airport1 != airport2;
