@@ -79,7 +79,7 @@ namespace Hedfan.Tests.Unit.Schedules.Airports
             }
 
             // Assert
-            airports.Should().HaveCount(9);
+            airports.Should().HaveCount(10);
         }
 
         [Fact]
@@ -116,7 +116,7 @@ namespace Hedfan.Tests.Unit.Schedules.Airports
             var airports = reader.GetAirports();
 
             // Assert
-            airports.Should().HaveCount(9);
+            airports.Should().HaveCount(10);
         }
 
         [Fact]
@@ -124,7 +124,7 @@ namespace Hedfan.Tests.Unit.Schedules.Airports
         {
             // Arrange
             using var reader = _fixture.Create<AirportReader>();
-            Enumerable.Repeat(reader, 9).ToList().ForEach(async x => await x.ReadAsync());
+            Enumerable.Repeat(reader, 10).ToList().ForEach(async x => await x.ReadAsync());
 
             // Act
             var result = await reader.ReadAsync();
@@ -165,7 +165,7 @@ namespace Hedfan.Tests.Unit.Schedules.Airports
         {
             // Arrange
             using var reader = _fixture.Create<AirportReader>();
-            Enumerable.Repeat(reader, 9).ToList().ForEach(x => x.Read());
+            Enumerable.Repeat(reader, 10).ToList().ForEach(x => x.Read());
 
             // Act
             var result = reader.Read();
