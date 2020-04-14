@@ -4,25 +4,25 @@ namespace Hedfan.Schedules.Airports
 {
     public class Airport
     {
-        public int Altitude { get; set; }
+        public int Altitude { get; }
 
-        public string City { get; set; }
+        public string City { get; }
 
-        public string Country { get; set; }
+        public string Country { get; }
 
-        public string Iata { get; set; }
+        public string Iata { get; }
 
-        public string Icao { get; set; }
+        public string Icao { get; }
 
-        public double Latitude { get; set; }
+        public double Latitude { get; }
 
-        public double Longitude { get; set; }
+        public double Longitude { get; }
 
-        public string Name { get; set; }
+        public string Name { get; }
 
-        public string Source { get; set; }
+        public string Source { get; }
 
-        public string Timezone { get; set; }
+        public string Timezone { get; }
 
         protected bool Equals(Airport other) =>
             string.Equals(Name, other.Name, StringComparison.InvariantCulture) &&
