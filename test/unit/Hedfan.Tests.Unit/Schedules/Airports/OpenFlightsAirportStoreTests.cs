@@ -23,7 +23,7 @@ namespace Hedfan.Tests.Unit.Schedules.Airports
             _fixture.Register<IAirportStore>(() => _fixture.Create<OpenFlightsAirportStore>());
         }
 
-        private static readonly Airport LondonLutonAirport = new Airport { Iata = "LTN" };
+        private static readonly Airport LondonLutonAirport = new Airport { Iata = "LTN", Icao = "EGGW" };
 
         private readonly IFixture _fixture;
 
@@ -37,7 +37,7 @@ namespace Hedfan.Tests.Unit.Schedules.Airports
             var airport = await airportStore.FindByIataAsync(LondonLutonAirport.Iata);
 
             // Assert
-            airport.Should().NotBeNull();
+            airport.Should().Be(LondonLutonAirport);
         }
 
         [Fact]
@@ -48,6 +48,32 @@ namespace Hedfan.Tests.Unit.Schedules.Airports
 
             // Act
             var airport = await airportStore.FindByIataAsync(_fixture.Create<string>());
+
+            // Assert
+            airport.Should().BeNull();
+        }
+
+        [Fact]
+        public async Task FindByIcaoAsyncShouldReturnAirport()
+        {
+            // Arrange
+            var airportStore = _fixture.Create<IAirportStore>();
+
+            // Act
+            var airport = await airportStore.FindByIcaoAsync(LondonLutonAirport.Icao);
+
+            // Assert
+            airport.Should().Be(LondonLutonAirport);
+        }
+
+        [Fact]
+        public async Task FindByIcaoAsyncShouldReturnNullWhenNoMatchingAirportCanBeFound()
+        {
+            // Arrange
+            var airportStore = _fixture.Create<IAirportStore>();
+
+            // Act
+            var airport = await airportStore.FindByIcaoAsync(_fixture.Create<string>());
 
             // Assert
             airport.Should().BeNull();

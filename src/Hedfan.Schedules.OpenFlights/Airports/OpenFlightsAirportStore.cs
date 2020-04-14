@@ -14,5 +14,7 @@ namespace Hedfan.Schedules.Airports
         }
 
         public Task<Airport> FindByIataAsync(string iata) => Task.FromResult(_airports.FirstOrDefault(x => x.Iata == iata));
+
+        public Task<Airport> FindByIcaoAsync(string icao) => Task.FromResult(_airports.FirstOrDefault(x => x.Icao == icao));
     }
 }
