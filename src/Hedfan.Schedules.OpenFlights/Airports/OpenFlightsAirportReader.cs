@@ -4,6 +4,7 @@ using System.IO;
 using System.Threading.Tasks;
 
 using CsvHelper;
+using CsvHelper.Configuration.Attributes;
 
 namespace Hedfan.Schedules.Airports
 {
@@ -38,7 +39,10 @@ namespace Hedfan.Schedules.Airports
             _disposed = true;
         }
 
-        public override Airport GetAirport() => throw new NotImplementedException();
+        public override Airport GetAirport()
+        {
+            var airport = _csvReader.GetRecord<OpenFlightsAirport>();
+        }
 
         public override bool Read()
         {
@@ -58,6 +62,15 @@ namespace Hedfan.Schedules.Airports
             }
 
             return _csvReader.ReadAsync();
+        }
+
+        private class OpenFlightsAirport
+        {
+            [Index(4)]
+            public string Iata { get; set; }
+
+            [Index(5)]
+            public string Icao { get; set; }
         }
     }
 }
