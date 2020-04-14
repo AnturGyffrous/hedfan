@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Linq;
 using System.Text;
 
@@ -50,6 +51,20 @@ namespace Hedfan.Tests.Unit.Schedules.Airports
 
             // Assert
             result.Should().BeTrue();
+        }
+
+        [Fact]
+        public void ReadShouldThrowObjectDisposedExceptionIfTheReaderHasBeenDisposed()
+        {
+            // Arrange
+            var reader = _fixture.Create<AirportReader>();
+            reader.Dispose();
+
+            // Act
+            Action act = () => reader.Read();
+
+            // Assert
+            act.Should().Throw<ObjectDisposedException>();
         }
     }
 }
