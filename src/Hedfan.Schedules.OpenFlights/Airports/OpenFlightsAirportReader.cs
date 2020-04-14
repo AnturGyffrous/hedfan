@@ -60,6 +60,8 @@ namespace Hedfan.Schedules.Airports
             return new Airport(builder);
         }
 
+        public override Task<Airport> GetAirportAsync() => Task.FromResult(GetAirport());
+
         public override bool Read()
         {
             if (_disposed)

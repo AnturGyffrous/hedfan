@@ -42,6 +42,30 @@ namespace Hedfan.Tests.Unit.Schedules.Airports
         }
 
         [Fact]
+        public async Task GetAirportAsyncShouldReturnAirport()
+        {
+            // Arrange
+            var reader = _fixture.Create<AirportReader>();
+            Enumerable.Repeat(reader, 3).ToList().ForEach(x => x.Read());
+
+            // Act
+            var airport = await reader.GetAirportAsync();
+
+            // Assert
+            airport.Name.Should().Be(ExampleAirports.LondonLuton.Name);
+            airport.City.Should().Be(ExampleAirports.LondonLuton.City);
+            airport.Country.Should().Be(ExampleAirports.LondonLuton.Country);
+            airport.Iata.Should().Be(ExampleAirports.LondonLuton.Iata);
+            airport.Icao.Should().Be(ExampleAirports.LondonLuton.Icao);
+            airport.Icao.Should().Be(ExampleAirports.LondonLuton.Icao);
+            airport.Latitude.Should().Be(ExampleAirports.LondonLuton.Latitude);
+            airport.Longitude.Should().Be(ExampleAirports.LondonLuton.Longitude);
+            airport.Altitude.Should().Be(ExampleAirports.LondonLuton.Altitude);
+            airport.Timezone.Should().Be(ExampleAirports.LondonLuton.Timezone);
+            airport.Source.Should().Be(ExampleAirports.LondonLuton.Source);
+        }
+
+        [Fact]
         public void GetAirportShouldReturnAirport()
         {
             // Arrange
