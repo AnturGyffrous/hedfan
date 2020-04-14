@@ -11,7 +11,7 @@ namespace Hedfan.Tests.Unit.Schedules.Airports
         {
             _fixture = new Fixture().Customize(new AutoMoqCustomization());
 
-            _fixture.Register<IAirportStore>();
+            _fixture.Register<IAirportStore>(() => _fixture.Create<OpenFlightsAirportStore>());
         }
 
         private readonly IFixture _fixture;
