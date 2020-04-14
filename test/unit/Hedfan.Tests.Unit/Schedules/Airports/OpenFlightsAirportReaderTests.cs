@@ -90,6 +90,19 @@ namespace Hedfan.Tests.Unit.Schedules.Airports
         }
 
         [Fact]
+        public void GetAirportsShouldReturnAllAirports()
+        {
+            // Arrange
+            var reader = _fixture.Create<AirportReader>();
+
+            // Act
+            var airports = reader.GetAirports();
+
+            // Assert
+            airports.Should().HaveCount(9);
+        }
+
+        [Fact]
         public async Task ReadAsyncShouldReturnFalseWhenNoMoreAirportsCanBeReadFromTheStream()
         {
             // Arrange

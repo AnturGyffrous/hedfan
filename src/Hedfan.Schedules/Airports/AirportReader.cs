@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Hedfan.Schedules.Airports
@@ -16,6 +17,8 @@ namespace Hedfan.Schedules.Airports
         public abstract Airport GetAirport();
 
         public abstract Task<Airport> GetAirportAsync();
+
+        public abstract IEnumerable<Airport> GetAirports();
 
         public abstract bool Read();
 

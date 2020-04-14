@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 
 using CsvHelper;
@@ -61,6 +63,24 @@ namespace Hedfan.Schedules.Airports
         }
 
         public override Task<Airport> GetAirportAsync() => Task.FromResult(GetAirport());
+
+        public override IEnumerable<Airport> GetAirports() =>
+            _csvReader
+                .GetRecords<OpenFlightsAirport>()
+                .Select(airport => new AirportBuilder
+                {
+                    Name = airport.Name,
+                    City = airport.City,
+                    Country = airport.Country,
+                    Iata = airport.Iata,
+                    Icao = airport.Icao,
+                    Latitude = airport.Latitude,
+                    Longitude = airport.Longitude,
+                    Altitude = airport.Altitude,
+                    Timezone = airport.Timezone,
+                    Source = airport.Source
+                })
+                .Select(builder => new Airport(builder));
 
         public override bool Read()
         {
