@@ -1,4 +1,4 @@
-﻿namespace Hedfan.Schedules
+﻿namespace Hedfan.Schedules.Airports
 {
     public class Class1
     {
