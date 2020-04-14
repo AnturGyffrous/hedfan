@@ -56,6 +56,10 @@ namespace Hedfan.Schedules.Airports
             }
         }
 
+        public static bool operator ==(Airport left, Airport right) => Equals(left, right);
+
+        public static bool operator !=(Airport left, Airport right) => !Equals(left, right);
+
         public override string ToString() => $"{Icao} {Name} ({Iata})";
     }
 }

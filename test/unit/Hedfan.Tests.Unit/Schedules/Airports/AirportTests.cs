@@ -35,6 +35,46 @@ namespace Hedfan.Tests.Unit.Schedules.Airports
         }
 
         [Fact]
+        public void EqualsOperatorShouldReturnFalseWhenWhenTheAirportsAreDifferent()
+        {
+            // Arrange
+            var airport1 = _fixture.Create<Airport>();
+            var airport2 = new AirportSubClass
+            {
+                Name = "Luton International Airport",
+                City = airport1.City,
+                Country = airport1.Country,
+                Iata = airport1.Iata,
+                Icao = airport1.Icao,
+                Longitude = airport1.Longitude,
+                Latitude = airport1.Latitude,
+                Altitude = airport1.Altitude,
+                Timezone = airport1.Timezone,
+                Source = airport1.Source
+            };
+
+            // Act
+            var result = airport1 == airport2;
+
+            // Assert
+            result.Should().BeFalse();
+        }
+
+        [Fact]
+        public void EqualsOperatorShouldReturnTrueWhenWhenTheAirportsHaveTheSameValues()
+        {
+            // Arrange
+            var airport1 = _fixture.Create<Airport>();
+            var airport2 = _fixture.Create<Airport>();
+
+            // Act
+            var result = airport1 == airport2;
+
+            // Assert
+            result.Should().BeTrue();
+        }
+
+        [Fact]
         public void EqualsShouldReturnFalseIfTheAirportAltitudeIsDifferent()
         {
             // Arrange
@@ -362,6 +402,46 @@ namespace Hedfan.Tests.Unit.Schedules.Airports
             // Assert
             airport1.Should().NotBeSameAs(airport2);
             hashCode1.Should().Be(hashCode2);
+        }
+
+        [Fact]
+        public void NotEqualsOperatorShouldReturnFalseWhenWhenTheAirportsHaveTheSameValues()
+        {
+            // Arrange
+            var airport1 = _fixture.Create<Airport>();
+            var airport2 = _fixture.Create<Airport>();
+
+            // Act
+            var result = airport1 != airport2;
+
+            // Assert
+            result.Should().BeFalse();
+        }
+
+        [Fact]
+        public void NotEqualsOperatorShouldReturnTrueWhenWhenTheAirportsAreDifferent()
+        {
+            // Arrange
+            var airport1 = _fixture.Create<Airport>();
+            var airport2 = new AirportSubClass
+            {
+                Name = "Luton International Airport",
+                City = airport1.City,
+                Country = airport1.Country,
+                Iata = airport1.Iata,
+                Icao = airport1.Icao,
+                Longitude = airport1.Longitude,
+                Latitude = airport1.Latitude,
+                Altitude = airport1.Altitude,
+                Timezone = airport1.Timezone,
+                Source = airport1.Source
+            };
+
+            // Act
+            var result = airport1 != airport2;
+
+            // Assert
+            result.Should().BeTrue();
         }
 
         [Fact]
