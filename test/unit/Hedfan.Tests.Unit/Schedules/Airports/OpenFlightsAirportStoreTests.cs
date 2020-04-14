@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 using AutoFixture;
 using AutoFixture.AutoMoq;
@@ -17,8 +18,12 @@ namespace Hedfan.Tests.Unit.Schedules.Airports
         {
             _fixture = new Fixture().Customize(new AutoMoqCustomization());
 
+            _fixture.Inject<IEnumerable<Airport>>(new[] { LondonLutonAirport });
+
             _fixture.Register<IAirportStore>(() => _fixture.Create<OpenFlightsAirportStore>());
         }
+
+        private static readonly Airport LondonLutonAirport = new Airport { Iata = "LTN" };
 
         private readonly IFixture _fixture;
 
@@ -29,10 +34,23 @@ namespace Hedfan.Tests.Unit.Schedules.Airports
             var airportStore = _fixture.Create<IAirportStore>();
 
             // Act
-            var airport = await airportStore.FindByIataAsync(_fixture.Create<string>());
+            var airport = await airportStore.FindByIataAsync(LondonLutonAirport.Iata);
 
             // Assert
             airport.Should().NotBeNull();
+        }
+
+        [Fact]
+        public async Task FindByIataAsyncShouldReturnNullWhenNoMatchingAirportCanBeFound()
+        {
+            // Arrange
+            var airportStore = _fixture.Create<IAirportStore>();
+
+            // Act
+            var airport = await airportStore.FindByIataAsync(_fixture.Create<string>());
+
+            // Assert
+            airport.Should().BeNull();
         }
     }
 }
