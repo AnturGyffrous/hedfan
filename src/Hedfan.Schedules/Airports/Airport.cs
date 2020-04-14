@@ -7,14 +7,14 @@ namespace Hedfan.Schedules.Airports
         public Airport(AirportBuilder builder)
         {
             Name = builder.Name ?? throw new ArgumentNullException(nameof(builder.Name));
-            City = builder.City ?? throw new ArgumentNullException(nameof(builder.City));
+            City = builder.City;
             Country = builder.Country ?? throw new ArgumentNullException(nameof(builder.Country));
             Iata = builder.Iata;
             Icao = builder.Icao ?? throw new ArgumentNullException(nameof(builder.Icao));
             Latitude = builder.Latitude;
             Longitude = builder.Longitude;
             Altitude = builder.Altitude;
-            Timezone = builder.Timezone ?? throw new ArgumentNullException(nameof(builder.Timezone));
+            Timezone = builder.Timezone;
             Source = builder.Source ?? throw new ArgumentNullException(nameof(builder.Source));
         }
 
@@ -57,14 +57,14 @@ namespace Hedfan.Schedules.Airports
             unchecked
             {
                 var hashCode = StringComparer.InvariantCulture.GetHashCode(Name);
-                hashCode = (hashCode * 397) ^ StringComparer.InvariantCulture.GetHashCode(City);
+                hashCode = (hashCode * 397) ^ (City != null ? StringComparer.InvariantCulture.GetHashCode(City) : 0);
                 hashCode = (hashCode * 397) ^ StringComparer.InvariantCulture.GetHashCode(Country);
                 hashCode = (hashCode * 397) ^ (Iata != null ? StringComparer.InvariantCulture.GetHashCode(Iata) : 0);
                 hashCode = (hashCode * 397) ^ StringComparer.InvariantCulture.GetHashCode(Icao);
                 hashCode = (hashCode * 397) ^ Latitude.GetHashCode();
                 hashCode = (hashCode * 397) ^ Longitude.GetHashCode();
                 hashCode = (hashCode * 397) ^ Altitude.GetHashCode();
-                hashCode = (hashCode * 397) ^ StringComparer.InvariantCulture.GetHashCode(Timezone);
+                hashCode = (hashCode * 397) ^ (Timezone != null ? StringComparer.InvariantCulture.GetHashCode(Timezone) : 0);
                 hashCode = (hashCode * 397) ^ StringComparer.InvariantCulture.GetHashCode(Source);
                 return hashCode;
             }

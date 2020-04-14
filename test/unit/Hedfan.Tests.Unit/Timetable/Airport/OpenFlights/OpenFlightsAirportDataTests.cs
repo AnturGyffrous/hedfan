@@ -33,8 +33,8 @@ namespace Hedfan.Tests.Unit.Timetable.Airport.OpenFlights
             records.ElementAt(3).Latitude.Should().Be(51.4706);
             records.ElementAt(3).Longitude.Should().Be(-0.461941);
             records.ElementAt(4).Altitude.Should().Be(26);
-            records.ElementAt(4).Dst.Should().Be('E');
-            records.ElementAt(6).UtcOffset.Should().Be(-3);
+            records.ElementAt(4).Dst.Should().Be("E");
+            records.ElementAt(6).UtcOffset.Should().Be("-3");
             records.ElementAt(6).Timezone.Should().Be("America/Argentina/Ushuaia");
             records.ElementAt(8).Source.Should().Be("OurAirports");
         }
@@ -55,7 +55,7 @@ namespace Hedfan.Tests.Unit.Timetable.Airport.OpenFlights
         public string Country { get; set; }
 
         [Index(10)]
-        public char Dst { get; set; }
+        public string Dst { get; set; }
 
         [Index(4)]
         public string Iata { get; set; }
@@ -79,6 +79,6 @@ namespace Hedfan.Tests.Unit.Timetable.Airport.OpenFlights
         public string Timezone { get; set; }
 
         [Index(9)]
-        public decimal UtcOffset { get; set; }
+        public string UtcOffset { get; set; }
     }
 }

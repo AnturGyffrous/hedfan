@@ -83,6 +83,60 @@ namespace Hedfan.Tests.Unit.Schedules.Airports
         }
 
         [Fact]
+        public void GetAirportShouldConvertMissingIataToNull()
+        {
+            // Arrange
+            var reader = _fixture.Create<AirportReader>();
+            Enumerable.Repeat(reader, 2).ToList().ForEach(x => x.Read());
+
+            // Act
+            var airport = reader.GetAirport();
+
+            // Assert
+            airport.Name.Should().Be("Winnipeg / St. Andrews Airport");
+            airport.City.Should().Be("Winnipeg");
+            airport.Country.Should().Be("Canada");
+            airport.Iata.Should().BeNull();
+        }
+
+        [Fact]
+        public void GetAirportShouldConvertMissingCityToNull()
+        {
+            // Arrange
+            var reader = _fixture.Create<AirportReader>();
+            Enumerable.Repeat(reader, 10).ToList().ForEach(x => x.Read());
+
+            // Act
+            var airport = reader.GetAirport();
+
+            // Assert
+            airport.Name.Should().Be("Ngukurr Airport");
+            airport.City.Should().BeNull();
+        }
+
+        [Fact]
+        public void GetAirportShouldConvertMissingTimezoneToNull()
+        {
+            // Arrange
+            var reader = _fixture.Create<AirportReader>();
+            Enumerable.Repeat(reader, 10).ToList().ForEach(x => x.Read());
+
+            // Act
+            var airport = reader.GetAirport();
+
+            // Assert
+            airport.Name.Should().Be("Ngukurr Airport");
+            airport.City.Should().BeNull();
+            airport.Country.Should().Be("Australia");
+            airport.Iata.Should().Be("RPM");
+            airport.Icao.Should().Be("YNGU");
+            airport.Latitude.Should().Be(-14.722800254821777);
+            airport.Longitude.Should().Be(134.7469940185547);
+            airport.Altitude.Should().Be(45);
+            airport.Timezone.Should().BeNull();
+        }
+
+        [Fact]
         public void GetAirportShouldReturnAirport()
         {
             // Arrange

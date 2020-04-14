@@ -21,71 +21,6 @@ namespace Hedfan.Tests.Unit.Schedules.Airports
         private readonly IFixture _fixture;
 
         [Fact]
-        public void ConstructorShouldThrowArgumentNullExceptionIfNameIsNull()
-        {
-            // Arrange
-            var builder = _fixture.Build<AirportBuilder>().Without(x => x.Name).Create();
-
-            // Act
-            Func<Airport> act = () => new Airport(builder);
-
-            // Assert
-            act.Should().Throw<ArgumentNullException>().WithMessage($"Value cannot be null. (Parameter '{nameof(Airport.Name)}')");
-        }
-
-        [Fact]
-        public void ConstructorShouldThrowArgumentNullExceptionIfCityIsNull()
-        {
-            // Arrange
-            var builder = _fixture.Build<AirportBuilder>().Without(x => x.City).Create();
-
-            // Act
-            Func<Airport> act = () => new Airport(builder);
-
-            // Assert
-            act.Should().Throw<ArgumentNullException>().WithMessage($"Value cannot be null. (Parameter '{nameof(Airport.City)}')");
-        }
-
-        [Fact]
-        public void ConstructorShouldThrowArgumentNullExceptionIfCountryIsNull()
-        {
-            // Arrange
-            var builder = _fixture.Build<AirportBuilder>().Without(x => x.Country).Create();
-
-            // Act
-            Func<Airport> act = () => new Airport(builder);
-
-            // Assert
-            act.Should().Throw<ArgumentNullException>().WithMessage($"Value cannot be null. (Parameter '{nameof(Airport.Country)}')");
-        }
-
-        [Fact]
-        public void ConstructorShouldNotThrowIfIataIsNull()
-        {
-            // Arrange
-            var builder = _fixture.Build<AirportBuilder>().Without(x => x.Iata).Create();
-
-            // Act
-            Func<Airport> act = () => new Airport(builder);
-
-            // Assert
-            act.Should().NotThrow();
-        }
-
-        [Fact]
-        public void ConstructorShouldThrowArgumentNullExceptionIfIcaoIsNull()
-        {
-            // Arrange
-            var builder = _fixture.Build<AirportBuilder>().Without(x => x.Icao).Create();
-
-            // Act
-            Func<Airport> act = () => new Airport(builder);
-
-            // Assert
-            act.Should().Throw<ArgumentNullException>().WithMessage($"Value cannot be null. (Parameter '{nameof(Airport.Icao)}')");
-        }
-
-        [Fact]
         public void ConstructorShouldCreateNewAirportUsingAirportBuilder()
         {
             // Arrange
@@ -105,6 +40,71 @@ namespace Hedfan.Tests.Unit.Schedules.Airports
             airport.Altitude.Should().Be(builder.Altitude);
             airport.Timezone.Should().Be(builder.Timezone);
             airport.Source.Should().Be(builder.Source);
+        }
+
+        [Fact]
+        public void ConstructorShouldNotThrowIfIataIsNull()
+        {
+            // Arrange
+            var builder = _fixture.Build<AirportBuilder>().Without(x => x.Iata).Create();
+
+            // Act
+            Func<Airport> act = () => new Airport(builder);
+
+            // Assert
+            act.Should().NotThrow();
+        }
+
+        [Fact]
+        public void ConstructorShouldThrowArgumentNullExceptionIfCountryIsNull()
+        {
+            // Arrange
+            var builder = _fixture.Build<AirportBuilder>().Without(x => x.Country).Create();
+
+            // Act
+            Func<Airport> act = () => new Airport(builder);
+
+            // Assert
+            act.Should().Throw<ArgumentNullException>().WithMessage($"Value cannot be null. (Parameter '{nameof(Airport.Country)}')");
+        }
+
+        [Fact]
+        public void ConstructorShouldThrowArgumentNullExceptionIfIcaoIsNull()
+        {
+            // Arrange
+            var builder = _fixture.Build<AirportBuilder>().Without(x => x.Icao).Create();
+
+            // Act
+            Func<Airport> act = () => new Airport(builder);
+
+            // Assert
+            act.Should().Throw<ArgumentNullException>().WithMessage($"Value cannot be null. (Parameter '{nameof(Airport.Icao)}')");
+        }
+
+        [Fact]
+        public void ConstructorShouldThrowArgumentNullExceptionIfNameIsNull()
+        {
+            // Arrange
+            var builder = _fixture.Build<AirportBuilder>().Without(x => x.Name).Create();
+
+            // Act
+            Func<Airport> act = () => new Airport(builder);
+
+            // Assert
+            act.Should().Throw<ArgumentNullException>().WithMessage($"Value cannot be null. (Parameter '{nameof(Airport.Name)}')");
+        }
+
+        [Fact]
+        public void ConstructorShouldThrowArgumentNullExceptionIfSourceIsNull()
+        {
+            // Arrange
+            var builder = _fixture.Build<AirportBuilder>().Without(x => x.Source).Create();
+
+            // Act
+            Func<Airport> act = () => new Airport(builder);
+
+            // Assert
+            act.Should().Throw<ArgumentNullException>().WithMessage($"Value cannot be null. (Parameter '{nameof(Airport.Source)}')");
         }
     }
 }
