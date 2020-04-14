@@ -16,7 +16,8 @@ namespace Hedfan.Tests.Unit.Schedules.Airports
 
             _fixture.Customize<Airport>(c => c
                 .With(x => x.Iata, "LTN")
-                .With(x => x.Icao, "EGGW"));
+                .With(x => x.Icao, "EGGW")
+                .With(x => x.Name, "London Luton Airport"));
         }
 
         private readonly IFixture _fixture;
