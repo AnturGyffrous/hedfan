@@ -52,8 +52,17 @@ namespace Hedfan.Tests.Unit.Schedules.Airports
             var airport = reader.GetAirport();
 
             // Assert
-            airport.Iata.Should().Be("LTN");
-            airport.Icao.Should().Be("EGGW");
+            airport.Name.Should().Be(ExampleAirports.LondonLuton.Name);
+            airport.City.Should().Be(ExampleAirports.LondonLuton.City);
+            airport.Country.Should().Be(ExampleAirports.LondonLuton.Country);
+            airport.Iata.Should().Be(ExampleAirports.LondonLuton.Iata);
+            airport.Icao.Should().Be(ExampleAirports.LondonLuton.Icao);
+            airport.Icao.Should().Be(ExampleAirports.LondonLuton.Icao);
+            airport.Latitude.Should().Be(ExampleAirports.LondonLuton.Latitude);
+            airport.Longitude.Should().Be(ExampleAirports.LondonLuton.Longitude);
+            airport.Altitude.Should().Be(ExampleAirports.LondonLuton.Altitude);
+            airport.Timezone.Should().Be(ExampleAirports.LondonLuton.Timezone);
+            airport.Source.Should().Be(ExampleAirports.LondonLuton.Source);
         }
 
         [Fact]

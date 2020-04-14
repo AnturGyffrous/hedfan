@@ -18,12 +18,10 @@ namespace Hedfan.Tests.Unit.Schedules.Airports
         {
             _fixture = new Fixture().Customize(new AutoMoqCustomization());
 
-            _fixture.Inject<IEnumerable<Airport>>(new[] { LondonLutonAirport });
+            _fixture.Inject<IEnumerable<Airport>>(new[] { ExampleAirports.LondonLuton });
 
             _fixture.Register<IAirportStore>(() => _fixture.Create<OpenFlightsAirportStore>());
         }
-
-        private static readonly Airport LondonLutonAirport = new Airport { Iata = "LTN", Icao = "EGGW" };
 
         private readonly IFixture _fixture;
 
@@ -34,10 +32,10 @@ namespace Hedfan.Tests.Unit.Schedules.Airports
             var airportStore = _fixture.Create<IAirportStore>();
 
             // Act
-            var airport = await airportStore.FindByIataAsync(LondonLutonAirport.Iata);
+            var airport = await airportStore.FindByIataAsync(ExampleAirports.LondonLuton.Iata);
 
             // Assert
-            airport.Should().Be(LondonLutonAirport);
+            airport.Should().Be(ExampleAirports.LondonLuton);
         }
 
         [Fact]
@@ -60,10 +58,10 @@ namespace Hedfan.Tests.Unit.Schedules.Airports
             var airportStore = _fixture.Create<IAirportStore>();
 
             // Act
-            var airport = await airportStore.FindByIcaoAsync(LondonLutonAirport.Icao);
+            var airport = await airportStore.FindByIcaoAsync(ExampleAirports.LondonLuton.Icao);
 
             // Assert
-            airport.Should().Be(LondonLutonAirport);
+            airport.Should().Be(ExampleAirports.LondonLuton);
         }
 
         [Fact]
