@@ -2,6 +2,7 @@
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 using AutoFixture;
 
@@ -38,6 +39,47 @@ namespace Hedfan.Tests.Unit.Schedules.Airports
 
             // Assert
             act.Should().NotThrow();
+        }
+
+        [Fact]
+        public async Task ReadAsyncShouldReturnFalseWhenNoMoreAirportsCanBeReadFromTheStream()
+        {
+            // Arrange
+            using var reader = _fixture.Create<AirportReader>();
+            Enumerable.Repeat(reader, 9).ToList().ForEach(async x => await x.ReadAsync());
+
+            // Act
+            var result = await reader.ReadAsync();
+
+            // Assert
+            result.Should().BeFalse();
+        }
+
+        [Fact]
+        public async Task ReadAsyncShouldReturnTrueWhenAnotherAirportCanBeReadFromTheStream()
+        {
+            // Arrange
+            using var reader = _fixture.Create<AirportReader>();
+
+            // Act
+            var result = await reader.ReadAsync();
+
+            // Assert
+            result.Should().BeTrue();
+        }
+
+        [Fact]
+        public void ReadAsyncShouldThrowObjectDisposedExceptionIfTheReaderHasBeenDisposed()
+        {
+            // Arrange
+            var reader = _fixture.Create<AirportReader>();
+            reader.Dispose();
+
+            // Act
+            Func<Task> act = async () => await reader.ReadAsync();
+
+            // Assert
+            act.Should().Throw<ObjectDisposedException>();
         }
 
         [Fact]

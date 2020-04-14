@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace Hedfan.Schedules.Airports
 {
@@ -13,5 +14,7 @@ namespace Hedfan.Schedules.Airports
         protected abstract void Dispose(bool disposing);
 
         public abstract bool Read();
+
+        public abstract Task<bool> ReadAsync();
     }
 }

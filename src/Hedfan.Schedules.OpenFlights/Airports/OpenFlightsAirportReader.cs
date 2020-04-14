@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using System.IO;
+using System.Threading.Tasks;
 
 using CsvHelper;
 
@@ -45,6 +46,16 @@ namespace Hedfan.Schedules.Airports
             }
 
             return _csvReader.Read();
+        }
+
+        public override Task<bool> ReadAsync()
+        {
+            if (_disposed)
+            {
+                throw new ObjectDisposedException(nameof(OpenFlightsAirportReader));
+            }
+
+            return _csvReader.ReadAsync();
         }
     }
 }
