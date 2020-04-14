@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hedfan.Tests.Unit", "test\u
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hedfan.Schedules", "src\Hedfan.Schedules\Hedfan.Schedules.csproj", "{53E5D439-CDB8-4B16-B09B-A47C4401E615}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hedfan.Schedules.OpenFlights", "src\Hedfan.Schedules.OpenFlights\Hedfan.Schedules.OpenFlights.csproj", "{78E42691-2BB1-419D-A3A1-7A486861F013}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -46,6 +48,18 @@ Global
 		{53E5D439-CDB8-4B16-B09B-A47C4401E615}.Release|x64.Build.0 = Release|Any CPU
 		{53E5D439-CDB8-4B16-B09B-A47C4401E615}.Release|x86.ActiveCfg = Release|Any CPU
 		{53E5D439-CDB8-4B16-B09B-A47C4401E615}.Release|x86.Build.0 = Release|Any CPU
+		{78E42691-2BB1-419D-A3A1-7A486861F013}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78E42691-2BB1-419D-A3A1-7A486861F013}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78E42691-2BB1-419D-A3A1-7A486861F013}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{78E42691-2BB1-419D-A3A1-7A486861F013}.Debug|x64.Build.0 = Debug|Any CPU
+		{78E42691-2BB1-419D-A3A1-7A486861F013}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{78E42691-2BB1-419D-A3A1-7A486861F013}.Debug|x86.Build.0 = Debug|Any CPU
+		{78E42691-2BB1-419D-A3A1-7A486861F013}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78E42691-2BB1-419D-A3A1-7A486861F013}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78E42691-2BB1-419D-A3A1-7A486861F013}.Release|x64.ActiveCfg = Release|Any CPU
+		{78E42691-2BB1-419D-A3A1-7A486861F013}.Release|x64.Build.0 = Release|Any CPU
+		{78E42691-2BB1-419D-A3A1-7A486861F013}.Release|x86.ActiveCfg = Release|Any CPU
+		{78E42691-2BB1-419D-A3A1-7A486861F013}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{D21C20DA-C007-4AAC-B12D-995FA542B1ED} = {11A65717-9661-4E22-BDAE-510B28311902}
