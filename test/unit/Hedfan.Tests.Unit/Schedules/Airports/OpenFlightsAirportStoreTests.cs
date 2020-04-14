@@ -1,7 +1,11 @@
-﻿using AutoFixture;
+﻿using System.Threading.Tasks;
+
+using AutoFixture;
 using AutoFixture.AutoMoq;
 
 using Hedfan.Schedules.Airports;
+
+using Xunit;
 
 namespace Hedfan.Tests.Unit.Schedules.Airports
 {
@@ -15,5 +19,17 @@ namespace Hedfan.Tests.Unit.Schedules.Airports
         }
 
         private readonly IFixture _fixture;
+
+        [Fact]
+        public async Task FindByIataAsyncShouldReturnAirport()
+        {
+            // Arrange
+            var airportStore = _fixture.Create<IAirportStore>();
+
+            // Act
+            var airport = await airportStore.FindByIataAsync();
+
+            // Assert
+        }
     }
 }
