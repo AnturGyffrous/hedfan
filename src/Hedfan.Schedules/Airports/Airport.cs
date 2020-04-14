@@ -4,6 +4,20 @@ namespace Hedfan.Schedules.Airports
 {
     public class Airport
     {
+        public Airport(AirportBuilder builder)
+        {
+            Name = builder.Name ?? throw new ArgumentNullException(nameof(builder.Name));
+            City = builder.City ?? throw new ArgumentNullException(nameof(builder.City));
+            Country = builder.Country ?? throw new ArgumentNullException(nameof(builder.Country));
+            Iata = builder.Iata ?? throw new ArgumentNullException(nameof(builder.Iata));
+            Icao = builder.Icao ?? throw new ArgumentNullException(nameof(builder.Icao));
+            Latitude = builder.Latitude;
+            Longitude = builder.Longitude;
+            Altitude = builder.Altitude;
+            Timezone = builder.Timezone ?? throw new ArgumentNullException(nameof(builder.Timezone));
+            Source = builder.Source ?? throw new ArgumentNullException(nameof(builder.Source));
+        }
+
         public int Altitude { get; }
 
         public string City { get; }
