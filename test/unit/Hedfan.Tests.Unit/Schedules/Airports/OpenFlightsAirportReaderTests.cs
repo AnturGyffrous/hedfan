@@ -52,6 +52,8 @@ namespace Hedfan.Tests.Unit.Schedules.Airports
             var airport = reader.GetAirport();
 
             // Assert
+            airport.Iata.Should().Be("LTN");
+            airport.Icao.Should().Be("EGGW");
         }
 
         [Fact]

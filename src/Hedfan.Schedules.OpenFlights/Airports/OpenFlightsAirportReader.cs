@@ -42,6 +42,12 @@ namespace Hedfan.Schedules.Airports
         public override Airport GetAirport()
         {
             var airport = _csvReader.GetRecord<OpenFlightsAirport>();
+
+            return new Airport
+            {
+                Iata = airport.Iata,
+                Icao = airport.Icao
+            };
         }
 
         public override bool Read()
