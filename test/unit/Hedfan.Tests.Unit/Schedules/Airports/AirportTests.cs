@@ -35,6 +35,266 @@ namespace Hedfan.Tests.Unit.Schedules.Airports
         }
 
         [Fact]
+        public void EqualsShouldReturnFalseIfTheAirportAltitudeIsDifferent()
+        {
+            // Arrange
+            var airport1 = _fixture.Create<Airport>();
+            var airport2 = new AirportSubClass
+            {
+                Name = airport1.Name,
+                City = airport1.City,
+                Country = airport1.Country,
+                Iata = airport1.Iata,
+                Icao = airport1.Icao,
+                Longitude = airport1.Longitude,
+                Latitude = airport1.Latitude,
+                Altitude = 83,
+                Timezone = airport1.Timezone,
+                Source = airport1.Source
+            };
+
+            // Act
+            var result = airport1.Equals(airport2);
+
+            // Assert
+            result.Should().BeFalse();
+        }
+
+        [Fact]
+        public void EqualsShouldReturnFalseIfTheAirportCityIsDifferent()
+        {
+            // Arrange
+            var airport1 = _fixture.Create<Airport>();
+            var airport2 = new AirportSubClass
+            {
+                Name = airport1.Name,
+                City = "Luton",
+                Country = airport1.Country,
+                Iata = airport1.Iata,
+                Icao = airport1.Icao,
+                Longitude = airport1.Longitude,
+                Latitude = airport1.Latitude,
+                Altitude = airport1.Altitude,
+                Timezone = airport1.Timezone,
+                Source = airport1.Source
+            };
+
+            // Act
+            var result = airport1.Equals(airport2);
+
+            // Assert
+            result.Should().BeFalse();
+        }
+
+        [Fact]
+        public void EqualsShouldReturnFalseIfTheAirportCountryIsDifferent()
+        {
+            // Arrange
+            var airport1 = _fixture.Create<Airport>();
+            var airport2 = new AirportSubClass
+            {
+                Name = airport1.Name,
+                City = airport1.City,
+                Country = "England",
+                Iata = airport1.Iata,
+                Icao = airport1.Icao,
+                Longitude = airport1.Longitude,
+                Latitude = airport1.Latitude,
+                Altitude = airport1.Altitude,
+                Timezone = airport1.Timezone,
+                Source = airport1.Source
+            };
+
+            // Act
+            var result = airport1.Equals(airport2);
+
+            // Assert
+            result.Should().BeFalse();
+        }
+
+        [Fact]
+        public void EqualsShouldReturnFalseIfTheAirportIataIsDifferent()
+        {
+            // Arrange
+            var airport1 = _fixture.Create<Airport>();
+            var airport2 = new AirportSubClass
+            {
+                Name = airport1.Name,
+                City = airport1.City,
+                Country = airport1.Country,
+                Iata = "LHR",
+                Icao = airport1.Icao,
+                Longitude = airport1.Longitude,
+                Latitude = airport1.Latitude,
+                Altitude = airport1.Altitude,
+                Timezone = airport1.Timezone,
+                Source = airport1.Source
+            };
+
+            // Act
+            var result = airport1.Equals(airport2);
+
+            // Assert
+            result.Should().BeFalse();
+        }
+
+        [Fact]
+        public void EqualsShouldReturnFalseIfTheAirportIcaoIsDifferent()
+        {
+            // Arrange
+            var airport1 = _fixture.Create<Airport>();
+            var airport2 = new AirportSubClass
+            {
+                Name = airport1.Name,
+                City = airport1.City,
+                Country = airport1.Country,
+                Iata = airport1.Iata,
+                Icao = "EGLL",
+                Longitude = airport1.Longitude,
+                Latitude = airport1.Latitude,
+                Altitude = airport1.Altitude,
+                Timezone = airport1.Timezone,
+                Source = airport1.Source
+            };
+
+            // Act
+            var result = airport1.Equals(airport2);
+
+            // Assert
+            result.Should().BeFalse();
+        }
+
+        [Fact]
+        public void EqualsShouldReturnFalseIfTheAirportLatitudeIsDifferent()
+        {
+            // Arrange
+            var airport1 = _fixture.Create<Airport>();
+            var airport2 = new AirportSubClass
+            {
+                Name = airport1.Name,
+                City = airport1.City,
+                Country = airport1.Country,
+                Iata = airport1.Iata,
+                Icao = airport1.Icao,
+                Longitude = airport1.Longitude,
+                Latitude = 51.4706,
+                Altitude = airport1.Altitude,
+                Timezone = airport1.Timezone,
+                Source = airport1.Source
+            };
+
+            // Act
+            var result = airport1.Equals(airport2);
+
+            // Assert
+            result.Should().BeFalse();
+        }
+
+        [Fact]
+        public void EqualsShouldReturnFalseIfTheAirportLongitudeIsDifferent()
+        {
+            // Arrange
+            var airport1 = _fixture.Create<Airport>();
+            var airport2 = new AirportSubClass
+            {
+                Name = airport1.Name,
+                City = airport1.City,
+                Country = airport1.Country,
+                Iata = airport1.Iata,
+                Icao = airport1.Icao,
+                Longitude = -0.461941,
+                Latitude = airport1.Latitude,
+                Altitude = airport1.Altitude,
+                Timezone = airport1.Timezone,
+                Source = airport1.Source
+            };
+
+            // Act
+            var result = airport1.Equals(airport2);
+
+            // Assert
+            result.Should().BeFalse();
+        }
+
+        [Fact]
+        public void EqualsShouldReturnFalseIfTheAirportNameIsDifferent()
+        {
+            // Arrange
+            var airport1 = _fixture.Create<Airport>();
+            var airport2 = new AirportSubClass
+            {
+                Name = "Luton International Airport",
+                City = airport1.City,
+                Country = airport1.Country,
+                Iata = airport1.Iata,
+                Icao = airport1.Icao,
+                Longitude = airport1.Longitude,
+                Latitude = airport1.Latitude,
+                Altitude = airport1.Altitude,
+                Timezone = airport1.Timezone,
+                Source = airport1.Source
+            };
+
+            // Act
+            var result = airport1.Equals(airport2);
+
+            // Assert
+            result.Should().BeFalse();
+        }
+
+        [Fact]
+        public void EqualsShouldReturnFalseIfTheAirportSourceIsDifferent()
+        {
+            // Arrange
+            var airport1 = _fixture.Create<Airport>();
+            var airport2 = new AirportSubClass
+            {
+                Name = airport1.Name,
+                City = airport1.City,
+                Country = airport1.Country,
+                Iata = airport1.Iata,
+                Icao = airport1.Icao,
+                Longitude = airport1.Longitude,
+                Latitude = airport1.Latitude,
+                Altitude = airport1.Altitude,
+                Timezone = airport1.Timezone,
+                Source = "Other"
+            };
+
+            // Act
+            var result = airport1.Equals(airport2);
+
+            // Assert
+            result.Should().BeFalse();
+        }
+
+        [Fact]
+        public void EqualsShouldReturnFalseIfTheAirportTimezoneIsDifferent()
+        {
+            // Arrange
+            var airport1 = _fixture.Create<Airport>();
+            var airport2 = new AirportSubClass
+            {
+                Name = airport1.Name,
+                City = airport1.City,
+                Country = airport1.Country,
+                Iata = airport1.Iata,
+                Icao = airport1.Icao,
+                Longitude = airport1.Longitude,
+                Latitude = airport1.Latitude,
+                Altitude = airport1.Altitude,
+                Timezone = "America/Argentina/Ushuaia",
+                Source = airport1.Source
+            };
+
+            // Act
+            var result = airport1.Equals(airport2);
+
+            // Assert
+            result.Should().BeFalse();
+        }
+
+        [Fact]
         public void EqualsShouldReturnTrueIfPropertiesAreTheSameEvenIfOtherIsDerivedType()
         {
             // Arrange
