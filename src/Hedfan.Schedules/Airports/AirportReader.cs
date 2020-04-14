@@ -2,5 +2,6 @@
 {
     public abstract class AirportReader
     {
+        public abstract bool Read();
     }
 }

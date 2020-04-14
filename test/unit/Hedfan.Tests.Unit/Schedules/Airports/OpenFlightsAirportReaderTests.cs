@@ -3,8 +3,12 @@ using System.Text;
 
 using AutoFixture;
 
+using FluentAssertions;
+
 using Hedfan.Schedules.Airports;
 using Hedfan.Tests.Unit.Properties;
+
+using Xunit;
 
 namespace Hedfan.Tests.Unit.Schedules.Airports
 {
@@ -20,5 +24,17 @@ namespace Hedfan.Tests.Unit.Schedules.Airports
 
         private readonly IFixture _fixture;
 
+        [Fact]
+        public void ReadShouldReturnTrueWhenAnotherAirportCanBeReadFromTheStream()
+        {
+            // Arrange
+            using var reader = _fixture.Create<AirportReader>();
+
+            // Act
+            var result = reader.Read();
+
+            // Assert
+            result.Should().BeTrue();
+        }
     }
 }
