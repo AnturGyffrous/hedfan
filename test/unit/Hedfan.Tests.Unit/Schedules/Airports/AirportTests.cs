@@ -23,6 +23,22 @@ namespace Hedfan.Tests.Unit.Schedules.Airports
         private readonly IFixture _fixture;
 
         [Fact]
+        public void GetHashCodeShouldReturnTheSameValueForAirportsWithTheSameValues()
+        {
+            // Arrange
+            var airport1 = _fixture.Create<Airport>();
+            var airport2 = _fixture.Create<Airport>();
+
+            // Act
+            var hashCode1 = airport1.GetHashCode();
+            var hashCode2 = airport2.GetHashCode();
+
+            // Assert
+            airport1.Should().NotBeSameAs(airport2);
+            hashCode1.Should().Be(hashCode2);
+        }
+
+        [Fact]
         public void ToStringShouldReturnUserFriendlyAirportDescription()
         {
             // Arrange
