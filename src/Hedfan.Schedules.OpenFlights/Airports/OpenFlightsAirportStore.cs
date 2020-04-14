@@ -1,6 +1,6 @@
 namespace Hedfan.Schedules.Airports
 {
-    public class OpenFlightsAirportStore
+    public class OpenFlightsAirportStore : IAirportStore
     {
     }
 }
