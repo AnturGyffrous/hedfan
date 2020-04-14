@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Hedfan.Schedules.OpenFlights.Data
+﻿namespace Hedfan.Schedules
 {
     public class Class1
     {
