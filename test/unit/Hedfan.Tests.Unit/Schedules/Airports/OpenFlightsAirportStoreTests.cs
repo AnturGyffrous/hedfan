@@ -27,7 +27,7 @@ namespace Hedfan.Tests.Unit.Schedules.Airports
             var airportStore = _fixture.Create<IAirportStore>();
 
             // Act
-            var airport = await airportStore.FindByIataAsync();
+            var airport = await airportStore.FindByIataAsync(_fixture.Create<string>());
 
             // Assert
         }
