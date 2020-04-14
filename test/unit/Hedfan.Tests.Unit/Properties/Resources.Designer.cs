@@ -77,5 +77,17 @@ namespace Hedfan.Tests.Unit.Properties {
                 return ResourceManager.GetString("EasyJetTimetableCallbackLtnGla", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 17,&quot;Patreksfjörður Airport&quot;,&quot;Patreksfjordur&quot;,&quot;Iceland&quot;,&quot;PFJ&quot;,&quot;BIPA&quot;,65.555801,-23.965,11,0,&quot;N&quot;,&quot;Atlantic/Reykjavik&quot;,&quot;airport&quot;,&quot;OurAirports&quot;
+        ///492,&quot;London Luton Airport&quot;,&quot;London&quot;,&quot;United Kingdom&quot;,&quot;LTN&quot;,&quot;EGGW&quot;,51.874698638916016,-0.36833301186561584,526,0,&quot;E&quot;,&quot;Europe/London&quot;,&quot;airport&quot;,&quot;OurAirports&quot;
+        ///534,&quot;Glasgow International Airport&quot;,&quot;Glasgow&quot;,&quot;United Kingdom&quot;,&quot;GLA&quot;,&quot;EGPF&quot;,55.8718986511,-4.43306016922,26,0,&quot;E&quot;,&quot;Europe/London&quot;,&quot;airport&quot;,&quot;OurAirports&quot;
+        ///3376,&quot;Wuhan Tianhe International Airport&quot;,&quot;Wuhan&quot;,&quot;China&quot;,&quot; [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string OpenFlightsAirportDataSample {
+            get {
+                return ResourceManager.GetString("OpenFlightsAirportDataSample", resourceCulture);
+            }
+        }
     }
 }

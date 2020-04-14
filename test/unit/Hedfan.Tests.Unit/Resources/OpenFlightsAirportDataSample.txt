@@ -1,0 +1,4 @@
+17,"Patreksfjörður Airport","Patreksfjordur","Iceland","PFJ","BIPA",65.555801,-23.965,11,0,"N","Atlantic/Reykjavik","airport","OurAirports"
+492,"London Luton Airport","London","United Kingdom","LTN","EGGW",51.874698638916016,-0.36833301186561584,526,0,"E","Europe/London","airport","OurAirports"
+534,"Glasgow International Airport","Glasgow","United Kingdom","GLA","EGPF",55.8718986511,-4.43306016922,26,0,"E","Europe/London","airport","OurAirports"
+3376,"Wuhan Tianhe International Airport","Wuhan","China","WUH","ZHHH",30.7838,114.208,113,8,"U","Asia/Shanghai","airport","OurAirports"

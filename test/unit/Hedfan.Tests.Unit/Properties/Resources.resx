@@ -126,4 +126,8 @@
     <value>..\Resources\EasyJetTimetableCallbackLtnGla.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
     <comment>Downloaded on Sat, 11 Apr 2020 22:42:52 GMT from http://www.easyjet.com/ejcms/nocache/jscallbacks/TimetableCallback.aspx?data={%22languageCode%22:%22en%22,%22originIata%22:%22LTN%22,%22destinationIata%22:%22GLA%22,%22passengers%22:2}</comment>
   </data>
+  <data name="OpenFlightsAirportDataSample" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\OpenFlightsAirportDataSample.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+    <comment>Excerpt from https://raw.githubusercontent.com/jpatokal/openflights/master/data/airports.dat downloaded on Sat, 11 Apr 2020</comment>
+  </data>
 </root>
