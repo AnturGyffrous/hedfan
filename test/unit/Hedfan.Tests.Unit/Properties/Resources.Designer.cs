@@ -79,10 +79,10 @@ namespace Hedfan.Tests.Unit.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 17,&quot;Patreksfjörður Airport&quot;,&quot;Patreksfjordur&quot;,&quot;Iceland&quot;,&quot;PFJ&quot;,&quot;BIPA&quot;,65.555801,-23.965,11,0,&quot;N&quot;,&quot;Atlantic/Reykjavik&quot;,&quot;airport&quot;,&quot;OurAirports&quot;
+        ///   Looks up a localized string similar to 15,&quot;Ísafjörður Airport&quot;,&quot;Isafjordur&quot;,&quot;Iceland&quot;,&quot;IFJ&quot;,&quot;BIIS&quot;,66.05809783935547,-23.135299682617188,8,0,&quot;N&quot;,&quot;Atlantic/Reykjavik&quot;,&quot;airport&quot;,&quot;OurAirports&quot;
+        ///22,&quot;Winnipeg / St. Andrews Airport&quot;,&quot;Winnipeg&quot;,&quot;Canada&quot;,\N,&quot;CYAV&quot;,50.0564002991,-97.03250122070001,760,-6,&quot;A&quot;,&quot;America/Winnipeg&quot;,&quot;airport&quot;,&quot;OurAirports&quot;
         ///492,&quot;London Luton Airport&quot;,&quot;London&quot;,&quot;United Kingdom&quot;,&quot;LTN&quot;,&quot;EGGW&quot;,51.874698638916016,-0.36833301186561584,526,0,&quot;E&quot;,&quot;Europe/London&quot;,&quot;airport&quot;,&quot;OurAirports&quot;
-        ///534,&quot;Glasgow International Airport&quot;,&quot;Glasgow&quot;,&quot;United Kingdom&quot;,&quot;GLA&quot;,&quot;EGPF&quot;,55.8718986511,-4.43306016922,26,0,&quot;E&quot;,&quot;Europe/London&quot;,&quot;airport&quot;,&quot;OurAirports&quot;
-        ///3376,&quot;Wuhan Tianhe International Airport&quot;,&quot;Wuhan&quot;,&quot;China&quot;,&quot; [rest of string was truncated]&quot;;.
+        ///507,&quot;London Heathrow Airport&quot;,&quot;London&quot;,&quot;United Kingd [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string OpenFlightsAirportDataSample {
             get {

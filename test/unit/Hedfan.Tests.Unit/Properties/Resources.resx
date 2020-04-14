@@ -128,6 +128,6 @@
   </data>
   <data name="OpenFlightsAirportDataSample" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\OpenFlightsAirportDataSample.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
-    <comment>Excerpt from https://raw.githubusercontent.com/jpatokal/openflights/master/data/airports.dat downloaded on Sat, 11 Apr 2020</comment>
+    <comment>Excerpt from https://raw.githubusercontent.com/jpatokal/openflights/master/data/airports.dat downloaded on Tue, 14 Apr 2020 at 15:23:49 GMT</comment>
   </data>
 </root>

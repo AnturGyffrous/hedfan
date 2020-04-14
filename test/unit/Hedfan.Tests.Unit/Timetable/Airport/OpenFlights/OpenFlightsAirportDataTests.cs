@@ -23,19 +23,19 @@ namespace Hedfan.Tests.Unit.Timetable.Airport.OpenFlights
             csv.Configuration.HasHeaderRecord = false;
             var records = csv.GetRecords<OpenFlightsAirport>().ToList();
 
-            records.ElementAt(0).AirportId.Should().Be(17);
-            records.ElementAt(0).Name.Should().Be("Patreksfjörður Airport");
-            records.ElementAt(0).City.Should().Be("Patreksfjordur");
-            records.ElementAt(1).Country.Should().Be("United Kingdom");
-            records.ElementAt(1).Iata.Should().Be("LTN");
-            records.ElementAt(1).Icao.Should().Be("EGGW");
-            records.ElementAt(1).Latitude.Should().Be(51.874698638916016);
-            records.ElementAt(1).Longitude.Should().Be(-0.36833301186561584);
-            records.ElementAt(2).Altitude.Should().Be(26);
-            records.ElementAt(2).Dst.Should().Be('E');
-            records.ElementAt(3).UtcOffset.Should().Be(8);
-            records.ElementAt(3).Timezone.Should().Be("Asia/Shanghai");
-            records.ElementAt(3).Source.Should().Be("OurAirports");
+            records.ElementAt(0).AirportId.Should().Be(15);
+            records.ElementAt(0).Name.Should().Be("Ísafjörður Airport");
+            records.ElementAt(1).City.Should().Be("Winnipeg");
+            records.ElementAt(2).Country.Should().Be("United Kingdom");
+            records.ElementAt(2).Iata.Should().Be("LTN");
+            records.ElementAt(2).Icao.Should().Be("EGGW");
+            records.ElementAt(3).Latitude.Should().Be(51.4706);
+            records.ElementAt(3).Longitude.Should().Be(-0.461941);
+            records.ElementAt(4).Altitude.Should().Be(26);
+            records.ElementAt(4).Dst.Should().Be('E');
+            records.ElementAt(6).UtcOffset.Should().Be(-3);
+            records.ElementAt(6).Timezone.Should().Be("America/Argentina/Ushuaia");
+            records.ElementAt(8).Source.Should().Be("OurAirports");
         }
     }
 
