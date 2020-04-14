@@ -38,6 +38,8 @@ namespace Hedfan.Schedules.Airports
             _disposed = true;
         }
 
+        public override Airport GetAirport() => throw new NotImplementedException();
+
         public override bool Read()
         {
             if (_disposed)

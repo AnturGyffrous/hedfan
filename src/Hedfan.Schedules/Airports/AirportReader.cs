@@ -13,6 +13,8 @@ namespace Hedfan.Schedules.Airports
 
         protected abstract void Dispose(bool disposing);
 
+        public abstract Airport GetAirport();
+
         public abstract bool Read();
 
         public abstract Task<bool> ReadAsync();

@@ -42,6 +42,19 @@ namespace Hedfan.Tests.Unit.Schedules.Airports
         }
 
         [Fact]
+        public void GetAirportShouldReturnAirport()
+        {
+            // Arrange
+            var reader = _fixture.Create<AirportReader>();
+            Enumerable.Repeat(reader, 3).ToList().ForEach(x => x.Read());
+
+            // Act
+            var airport = reader.GetAirport();
+
+            // Assert
+        }
+
+        [Fact]
         public async Task ReadAsyncShouldReturnFalseWhenNoMoreAirportsCanBeReadFromTheStream()
         {
             // Arrange
