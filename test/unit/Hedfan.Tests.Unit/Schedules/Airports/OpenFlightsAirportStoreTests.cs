@@ -5,9 +5,9 @@ using Hedfan.Schedules.Airports;
 
 namespace Hedfan.Tests.Unit.Schedules.Airports
 {
-    public class OpenFlightsAirportsTests
+    public class OpenFlightsAirportStoreTests
     {
-        public OpenFlightsAirportsTests()
+        public OpenFlightsAirportStoreTests()
         {
             _fixture = new Fixture().Customize(new AutoMoqCustomization());
 
