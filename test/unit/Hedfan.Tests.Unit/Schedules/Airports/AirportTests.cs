@@ -22,6 +22,24 @@ namespace Hedfan.Tests.Unit.Schedules.Airports
 
         private readonly IFixture _fixture;
 
+        private class AirportSubClass : Airport
+        {
+        }
+
+        [Fact]
+        public void EqualsShouldReturnTrueIfPropertiesAreTheSameEvenIfOtherIsDerivedType()
+        {
+            // Arrange
+            var airport1 = _fixture.Create<Airport>();
+            var airport2 = new AirportSubClass { Iata = airport1.Iata, Icao = airport1.Icao, Name = airport1.Name };
+
+            // Act
+            var result = airport1.Equals(airport2);
+
+            // Assert
+            result.Should().BeTrue();
+        }
+
         [Fact]
         public void EqualsShouldReturnTrueIfTheReferencesAreDifferentButThePropertiesAreTheSame()
         {
