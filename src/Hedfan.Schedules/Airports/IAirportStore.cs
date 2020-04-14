@@ -1,6 +1,9 @@
-﻿namespace Hedfan.Schedules.Airports
+﻿using System.Threading.Tasks;
+
+namespace Hedfan.Schedules.Airports
 {
     public interface IAirportStore
     {
+        Task<Airport> FindByIataAsync(string iata);
     }
 }
