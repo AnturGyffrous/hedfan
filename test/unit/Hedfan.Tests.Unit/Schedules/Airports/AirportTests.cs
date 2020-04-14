@@ -338,6 +338,34 @@ namespace Hedfan.Tests.Unit.Schedules.Airports
         }
 
         [Fact]
+        public void EqualsShouldReturnTrueIfPropertiesAreTheSameButIataIsNull()
+        {
+            // Arrange
+            var builder = new AirportBuilder
+            {
+                Name = "Winnipeg / St. Andrews Airport",
+                City = "Winnipeg",
+                Country = "Canada",
+                Iata = null,
+                Icao = "CYAV",
+                Longitude = 50.0564002991,
+                Latitude = -97.03250122070001,
+                Altitude = 760,
+                Timezone = "America/Winnipeg",
+                Source = "OurAirports"
+            };
+
+            var airport1 = new AirportSubClass(builder);
+            var airport2 = new AirportSubClass(builder);
+
+            // Act
+            var result = airport1.Equals(airport2);
+
+            // Assert
+            result.Should().BeTrue();
+        }
+
+        [Fact]
         public void EqualsShouldReturnTrueIfPropertiesAreTheSameEvenIfOtherIsDerivedType()
         {
             // Arrange

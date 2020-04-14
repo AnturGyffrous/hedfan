@@ -9,7 +9,7 @@ namespace Hedfan.Schedules.Airports
             Name = builder.Name ?? throw new ArgumentNullException(nameof(builder.Name));
             City = builder.City ?? throw new ArgumentNullException(nameof(builder.City));
             Country = builder.Country ?? throw new ArgumentNullException(nameof(builder.Country));
-            Iata = builder.Iata ?? throw new ArgumentNullException(nameof(builder.Iata));
+            Iata = builder.Iata;
             Icao = builder.Icao ?? throw new ArgumentNullException(nameof(builder.Icao));
             Latitude = builder.Latitude;
             Longitude = builder.Longitude;
@@ -59,7 +59,7 @@ namespace Hedfan.Schedules.Airports
                 var hashCode = StringComparer.InvariantCulture.GetHashCode(Name);
                 hashCode = (hashCode * 397) ^ StringComparer.InvariantCulture.GetHashCode(City);
                 hashCode = (hashCode * 397) ^ StringComparer.InvariantCulture.GetHashCode(Country);
-                hashCode = (hashCode * 397) ^ StringComparer.InvariantCulture.GetHashCode(Iata);
+                hashCode = (hashCode * 397) ^ (Iata != null ? StringComparer.InvariantCulture.GetHashCode(Iata) : 0);
                 hashCode = (hashCode * 397) ^ StringComparer.InvariantCulture.GetHashCode(Icao);
                 hashCode = (hashCode * 397) ^ Latitude.GetHashCode();
                 hashCode = (hashCode * 397) ^ Longitude.GetHashCode();
