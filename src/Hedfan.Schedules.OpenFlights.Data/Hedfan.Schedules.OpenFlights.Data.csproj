@@ -6,6 +6,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Hedfan.Schedules.OpenFlights\Hedfan.Schedules.OpenFlights.csproj" />
+    <ProjectReference Include="..\Hedfan.Schedules\Hedfan.Schedules.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Update="Properties\Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
