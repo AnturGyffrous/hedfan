@@ -4,7 +4,7 @@ namespace Hedfan.Tests.Unit.Schedules.Airports
 {
     public static class ExampleAirports
     {
-        public static Airport LondonLuton { get; } = new Airport(new AirportBuilder
+        public static Airport LondonLuton { get; } = new Airport
         {
             Name = "London Luton Airport",
             City = "London",
@@ -16,6 +16,6 @@ namespace Hedfan.Tests.Unit.Schedules.Airports
             Altitude = 526,
             Timezone = "Europe/London",
             Source = "OurAirports"
-        });
+        };
     }
 }

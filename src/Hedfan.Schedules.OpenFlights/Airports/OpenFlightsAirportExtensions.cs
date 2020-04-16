@@ -5,7 +5,7 @@ namespace Hedfan.Schedules.Airports
     internal static class OpenFlightsAirportExtensions
     {
         internal static Airport ToAirport(this OpenFlightsAirport openFlightsAirport) =>
-            new Airport(new AirportBuilder
+            new Airport
             {
                 Name = openFlightsAirport.Name,
                 City = openFlightsAirport.City.NullIf("\\N", string.Empty),
@@ -17,7 +17,7 @@ namespace Hedfan.Schedules.Airports
                 Altitude = openFlightsAirport.Altitude,
                 Timezone = openFlightsAirport.Timezone.NullIf("\\N", string.Empty),
                 Source = openFlightsAirport.Source
-            });
+            };
 
         internal static string NullIf(this string value, params string[] matches) => matches.Contains(value) ? null : value;
     }
