@@ -17,5 +17,19 @@ namespace Hedfan.Tests.Unit.Schedules.Airports
             Timezone = "Europe/London",
             Source = "OurAirports"
         };
+
+        public static Airport WinnipegStAndrews { get; } = new Airport
+        {
+            Name = "Winnipeg / St. Andrews Airport",
+            City = "Winnipeg",
+            Country = "Canada",
+            Iata = null,
+            Icao = "CYAV",
+            Latitude = 50.0564002991,
+            Longitude = -97.03250122070001,
+            Altitude = 760,
+            Timezone = "America/Winnipeg",
+            Source = "OurAirports"
+        };
     }
 }

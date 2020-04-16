@@ -22,6 +22,9 @@
 
         public string Timezone { get; set; }
 
-        public override string ToString() => $"{Icao} {Name} ({Iata})";
+        public override string ToString() =>
+            string.IsNullOrEmpty(Iata)
+                ? $"{Icao} {Name}"
+                : $"{Icao} {Name} ({Iata})";
     }
 }
