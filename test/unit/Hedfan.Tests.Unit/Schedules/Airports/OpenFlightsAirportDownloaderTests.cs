@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -47,11 +48,9 @@ namespace Hedfan.Tests.Unit.Schedules.Airports
             Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken);
         }
 
-        [Fact]
-        public async Task DownloadShouldUseHardcodedUrlToDownloadLatestData()
+        private async Task AssertThatStreamCanBeUsedByAirportStore(Stream stream)
         {
             // Arrange
-            var stream = await OpenFlightsAirportDownloader.Download(_fixture.Create<HttpClient>());
             var reader = new OpenFlightsAirportReader(stream);
             var airportStore = new OpenFlightsAirportStore(reader.GetAirports());
 
@@ -66,7 +65,22 @@ namespace Hedfan.Tests.Unit.Schedules.Airports
             result.Latitude.Should().Be(-14.722800254821777);
             result.Longitude.Should().Be(134.7469940185547);
             result.Altitude.Should().Be(45);
+        }
 
+        [Fact]
+        public async Task DownloadShouldUseHardcodedUrlToDownloadLatestData()
+        {
+            // Arrange
+            async Task<Stream> Act()
+            {
+                return await OpenFlightsAirportDownloader.Download(_fixture.Create<HttpClient>());
+            }
+
+            // Act
+            var stream = await Act();
+
+            // Assert
+            await AssertThatStreamCanBeUsedByAirportStore(stream);
             _fixture.Create<Mock<HttpMessageHandler>>()
                 .Protected()
                 .As<ISendAsyncProtectedMembers>()
@@ -79,15 +93,16 @@ namespace Hedfan.Tests.Unit.Schedules.Airports
         public async Task DownloadShouldUseHardcodedUserAgentIfNoneIsSetInClient()
         {
             // Arrange
-            async Task Act()
+            async Task<Stream> Act()
             {
-                await OpenFlightsAirportDownloader.Download(_fixture.Create<HttpClient>());
+                return await OpenFlightsAirportDownloader.Download(_fixture.Create<HttpClient>());
             }
 
             // Act
-            await Act();
+            var stream = await Act();
 
             // Assert
+            await AssertThatStreamCanBeUsedByAirportStore(stream);
             _fixture.Create<Mock<HttpMessageHandler>>()
                 .Protected()
                 .As<ISendAsyncProtectedMembers>()
@@ -103,17 +118,14 @@ namespace Hedfan.Tests.Unit.Schedules.Airports
             const string productName = "UnitTest";
             const string productVersion = "1.0";
 
-            async Task Act()
-            {
-                var client = _fixture.Create<HttpClient>();
-                client.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue(productName, productVersion));
-                await OpenFlightsAirportDownloader.Download(client);
-            }
+            var client = _fixture.Create<HttpClient>();
+            client.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue(productName, productVersion));
 
             // Act
-            await Act();
+            var stream = await OpenFlightsAirportDownloader.Download(client);
 
             // Assert
+            await AssertThatStreamCanBeUsedByAirportStore(stream);
             _fixture.Create<Mock<HttpMessageHandler>>()
                 .Protected()
                 .As<ISendAsyncProtectedMembers>()
