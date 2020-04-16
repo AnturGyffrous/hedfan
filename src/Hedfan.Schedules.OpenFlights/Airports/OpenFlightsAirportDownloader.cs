@@ -20,6 +20,8 @@ namespace Hedfan.Schedules.Airports
 
             var response = await httpClient.SendAsync(request);
 
+            response.EnsureSuccessStatusCode();
+
             return await response.Content.ReadAsStreamAsync();
         }
     }

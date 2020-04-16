@@ -68,6 +68,23 @@ namespace Hedfan.Tests.Unit.Schedules.Airports
         }
 
         [Fact]
+        public void DownloadShouldThrowIfResponseIsNotSuccessStatusCode()
+        {
+            // Arrange
+            _fixture.Create<Mock<HttpMessageHandler>>()
+                .Protected()
+                .As<ISendAsyncProtectedMembers>()
+                .Setup(x => x.SendAsync(It.IsAny<HttpRequestMessage>(), It.IsAny<CancellationToken>()))
+                .ReturnsAsync(new HttpResponseMessage { StatusCode = HttpStatusCode.NotFound });
+
+            // Act
+            Func<Task> act = async () => await OpenFlightsAirportDownloader.Download(_fixture.Create<HttpClient>());
+
+            // Assert
+            act.Should().Throw<HttpRequestException>();
+        }
+
+        [Fact]
         public async Task DownloadShouldUseHardcodedUrlToDownloadLatestData()
         {
             // Arrange
