@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -71,6 +72,53 @@ namespace Hedfan.Tests.Unit.Schedules.Airports
                 .As<ISendAsyncProtectedMembers>()
                 .Verify(x => x.SendAsync(
                     It.Is<HttpRequestMessage>(m => m.RequestUri == new Uri("https://raw.githubusercontent.com/jpatokal/openflights/master/data/airports.dat")),
+                    It.IsAny<CancellationToken>()));
+        }
+
+        [Fact]
+        public async Task DownloadShouldUseHardcodedUserAgentIfNoneIsSetInClient()
+        {
+            // Arrange
+            async Task Act()
+            {
+                await OpenFlightsAirportDownloader.Download(_fixture.Create<HttpClient>());
+            }
+
+            // Act
+            await Act();
+
+            // Assert
+            _fixture.Create<Mock<HttpMessageHandler>>()
+                .Protected()
+                .As<ISendAsyncProtectedMembers>()
+                .Verify(x => x.SendAsync(
+                    It.Is<HttpRequestMessage>(m => m.Headers.UserAgent.ToString().Contains(nameof(OpenFlightsAirportDownloader))),
+                    It.IsAny<CancellationToken>()));
+        }
+
+        [Fact]
+        public async Task DownloadShouldUseUserAgentOfClientIfOneIsSet()
+        {
+            // Arrange
+            const string productName = "UnitTest";
+            const string productVersion = "1.0";
+
+            async Task Act()
+            {
+                var client = _fixture.Create<HttpClient>();
+                client.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue(productName, productVersion));
+                await OpenFlightsAirportDownloader.Download(client);
+            }
+
+            // Act
+            await Act();
+
+            // Assert
+            _fixture.Create<Mock<HttpMessageHandler>>()
+                .Protected()
+                .As<ISendAsyncProtectedMembers>()
+                .Verify(x => x.SendAsync(
+                    It.Is<HttpRequestMessage>(m => m.Headers.UserAgent.ToString() == $"{productName}/{productVersion}"),
                     It.IsAny<CancellationToken>()));
         }
     }
