@@ -19,6 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\src\Hedfan.Schedules.EasyJet\Hedfan.Schedules.EasyJet.csproj" />
     <ProjectReference Include="..\..\..\src\Hedfan.Schedules.OpenFlights.Data\Hedfan.Schedules.OpenFlights.Data.csproj" />
     <ProjectReference Include="..\..\..\src\Hedfan.Schedules.OpenFlights\Hedfan.Schedules.OpenFlights.csproj" />
     <ProjectReference Include="..\..\..\src\Hedfan.Schedules\Hedfan.Schedules.csproj" />
