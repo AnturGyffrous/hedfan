@@ -4,6 +4,20 @@ namespace Hedfan.Tests.Unit.Schedules.Airports
 {
     public static class ExampleAirports
     {
+        public static Airport Glasgow { get; } = new Airport
+        {
+            Name = "Glasgow International Airport",
+            City = "Glasgow",
+            Country = "United Kingdom",
+            Iata = "GLA",
+            Icao = "EGPF",
+            Latitude = 55.8718986511,
+            Longitude = -4.43306016922,
+            Altitude = 26,
+            Timezone = "Europe/London",
+            Source = "OurAirports"
+        };
+
         public static Airport LondonLuton { get; } = new Airport
         {
             Name = "London Luton Airport",
