@@ -3,6 +3,8 @@
 using AutoFixture;
 using AutoFixture.AutoMoq;
 
+using FluentAssertions;
+
 using Hedfan.Schedules.Airports;
 using Hedfan.Schedules.Routes;
 using Hedfan.Tests.Unit.Schedules.Airports;
@@ -42,6 +44,8 @@ namespace Hedfan.Tests.Unit.Schedules.Routes
             var route = routes.First(x => x.Origin.Iata == ExampleAirports.LondonLuton.Iata && x.Destination.Iata == ExampleAirports.Glasgow.Iata);
 
             // Assert
+            route.Origin.Icao.Should().Be(ExampleAirports.LondonLuton.Icao);
+            route.Destination.Icao.Should().Be(ExampleAirports.Glasgow.Icao);
         }
     }
 }
