@@ -5,6 +5,11 @@ namespace Hedfan.Schedules.Routes
 {
     public class EasyJetDataProvider : IEasyJetDataProvider
     {
-        public Task<Route> GetRoutesAsync(HttpClient httpClient) => throw new System.NotImplementedException();
+        public async Task<Route> GetRoutesAsync(HttpClient httpClient)
+        {
+            var request = new HttpRequestMessage(HttpMethod.Get, "http://www.easyjet.com/en/cheap-flights/timetables");
+
+            var response = await httpClient.SendAsync(request);
+        }
     }
 }
