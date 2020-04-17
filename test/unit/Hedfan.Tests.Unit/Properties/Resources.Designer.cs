@@ -79,6 +79,23 @@ namespace Hedfan.Tests.Unit.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 
+        ///
+        ///&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot; &quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&gt;
+        ///&lt;html lang=&quot;en&quot; xml:lang=&quot;en&quot; xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;
+        ///&lt;!--SC-prod-fra-sc2-green-web02--&gt;
+        ///&lt;head&gt;
+        ///	&lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=Edge&quot; /&gt;
+        ///	&lt;link rel=&quot;SHORTCUT ICON&quot; href=&quot;/favicon.ico&quot; /&gt;
+        ///	&lt;title&gt;easyJet.com | Flight Timetables&lt;/title&gt;&lt;meta name=&quot;keywords&quot; content=&quot;flights, cheap flights, destination guides, travel guides, route map, inspire me, tra [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string EasyJetTimetables {
+            get {
+                return ResourceManager.GetString("EasyJetTimetables", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
         internal static byte[] OpenFlightsAirportDataSample {
