@@ -1,4 +1,4 @@
-﻿namespace Hedfan.Schedules
+﻿namespace Hedfan.Schedules.Routes
 {
     public class Class1
     {
