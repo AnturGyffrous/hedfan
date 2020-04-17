@@ -1,6 +1,6 @@
 ﻿namespace Hedfan.Schedules.Routes
 {
-    public class EasyJetRoutes
+    public class EasyJetRoutes : IRoutes
     {
     }
 }
