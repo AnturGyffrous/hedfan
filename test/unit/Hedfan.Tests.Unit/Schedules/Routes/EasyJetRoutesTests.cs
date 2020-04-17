@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections;
+using System.Linq;
 
 using AutoFixture;
 using AutoFixture.AutoMoq;
@@ -46,6 +47,32 @@ namespace Hedfan.Tests.Unit.Schedules.Routes
             // Assert
             route.Origin.Icao.Should().Be(ExampleAirports.LondonLuton.Icao);
             route.Destination.Icao.Should().Be(ExampleAirports.Glasgow.Icao);
+        }
+
+        [Fact]
+        public void NonGenericGetEnumeratorShouldReturnLondonLutonToGlasgowRoute()
+        {
+            // Arrange
+            var routes = _fixture.Create<IRoutes>() as IEnumerable;
+            Route result = null;
+
+            // Act
+            foreach (var o in routes)
+            {
+                if (o is Route route)
+                {
+                    if (route.Origin.Iata == ExampleAirports.LondonLuton.Iata && route.Destination.Iata == ExampleAirports.Glasgow.Iata)
+                    {
+                        result = route;
+                        break;
+                    }
+                }
+            }
+
+            // Assert
+            result.Should().NotBeNull();
+            result?.Origin.Icao.Should().Be(ExampleAirports.LondonLuton.Icao);
+            result?.Destination.Icao.Should().Be(ExampleAirports.Glasgow.Icao);
         }
     }
 }
