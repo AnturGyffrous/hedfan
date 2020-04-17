@@ -5,4 +5,8 @@
     <RootNamespace>Hedfan.Schedules</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Hedfan.Schedules\Hedfan.Schedules.csproj" />
+  </ItemGroup>
+
 </Project>
