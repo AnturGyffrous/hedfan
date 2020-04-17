@@ -1,6 +1,8 @@
-﻿namespace Hedfan.Schedules.Routes
+﻿using System.Collections.Generic;
+
+namespace Hedfan.Schedules.Routes
 {
-    public interface IRoutes
+    public interface IRoutes : IEnumerable<Route>
     {
     }
 }
