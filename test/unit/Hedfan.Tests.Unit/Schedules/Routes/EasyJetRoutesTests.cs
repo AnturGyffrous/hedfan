@@ -3,8 +3,11 @@
 using AutoFixture;
 using AutoFixture.AutoMoq;
 
+using Hedfan.Schedules.Airports;
 using Hedfan.Schedules.Routes;
 using Hedfan.Tests.Unit.Schedules.Airports;
+
+using Moq;
 
 using Xunit;
 
@@ -15,6 +18,14 @@ namespace Hedfan.Tests.Unit.Schedules.Routes
         public EasyJetRoutesTests()
         {
             _fixture = new Fixture().Customize(new AutoMoqCustomization());
+
+            var airportStore = _fixture.Freeze<Mock<IAirportStore>>();
+            airportStore
+                .Setup(x => x.FindByIataAsync(ExampleAirports.LondonLuton.Iata))
+                .ReturnsAsync(ExampleAirports.LondonLuton);
+            airportStore
+                .Setup(x => x.FindByIataAsync(ExampleAirports.Glasgow.Iata))
+                .ReturnsAsync(ExampleAirports.Glasgow);
 
             _fixture.Register<IRoutes>(() => _fixture.Create<EasyJetRoutes>());
         }
