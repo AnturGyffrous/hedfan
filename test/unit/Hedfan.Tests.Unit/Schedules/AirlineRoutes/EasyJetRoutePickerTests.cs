@@ -1,4 +1,6 @@
-﻿using System.Net;
+﻿using System.Collections;
+using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading;
@@ -70,6 +72,61 @@ namespace Hedfan.Tests.Unit.Schedules.AirlineRoutes
                 {
                     result = route;
                     break;
+                }
+            }
+
+            // Assert
+            result.Should().NotBeNull();
+            result?.Airline.Icao.Should().Be("EZY");
+            result?.Origin.Icao.Should().Be(ExampleAirports.LondonLuton.Icao);
+            result?.Destination.Icao.Should().Be(ExampleAirports.Glasgow.Icao);
+        }
+
+        [Fact]
+        public void GetEnumeratorShouldReturnAllRoutes()
+        {
+            // Arrange
+            var routes = _fixture.Create<IAsyncAirlineRoutes>();
+
+            // Act
+            var count = routes.Count();
+
+            // Assert
+            count.Should().Be(2326);
+        }
+
+        [Fact]
+        public void GetEnumeratorShouldReturnLondonLutonToGlasgowRoute()
+        {
+            // Arrange
+            var routes = _fixture.Create<IAsyncAirlineRoutes>();
+
+            // Act
+            var result = routes.First(x => x.Origin.Iata == ExampleAirports.LondonLuton.Iata && x.Destination.Iata == ExampleAirports.Glasgow.Iata);
+
+            // Assert
+            result.Airline.Icao.Should().Be("EZY");
+            result.Origin.Icao.Should().Be(ExampleAirports.LondonLuton.Icao);
+            result.Destination.Icao.Should().Be(ExampleAirports.Glasgow.Icao);
+        }
+
+        [Fact]
+        public void NonGenericGetEnumeratorShouldReturnLondonLutonToGlasgowRoute()
+        {
+            // Arrange
+            var routes = _fixture.Create<IAsyncAirlineRoutes>() as IEnumerable;
+            AirlineRoute result = null;
+
+            // Act
+            foreach (var o in routes)
+            {
+                if (o is AirlineRoute route)
+                {
+                    if (route.Origin.Iata == ExampleAirports.LondonLuton.Iata && route.Destination.Iata == ExampleAirports.Glasgow.Iata)
+                    {
+                        result = route;
+                        break;
+                    }
                 }
             }
 

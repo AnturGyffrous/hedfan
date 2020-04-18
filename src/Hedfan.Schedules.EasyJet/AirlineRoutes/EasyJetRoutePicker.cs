@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Text.RegularExpressions;
@@ -15,9 +16,9 @@ namespace Hedfan.Schedules.AirlineRoutes
 {
     public class EasyJetRoutePicker : IAsyncAirlineRoutes
     {
-        private static readonly Regex RouteArrayJsonRegex = new Regex("\\[\\{.*\"Iata\".*:.*\\}\\]", RegexOptions.Compiled);
-
         private static readonly Airline EasyJet = new Airline { Name = "easyJet", CompanyName = "EasyJet UK Limited", Iata = "U2", Icao = "EZY", Callsign = "EASY" };
+
+        private static readonly Regex RouteArrayJsonRegex = new Regex("\\[\\{.*\"Iata\".*:.*\\}\\]", RegexOptions.Compiled);
 
         private readonly IAirportStore _airportStore;
 
@@ -54,6 +55,25 @@ namespace Hedfan.Schedules.AirlineRoutes
                     Origin = await _airportStore.FindByIataAsync(route.Origin.Iata),
                     Destination = await _airportStore.FindByIataAsync(route.Destination.Iata)
                 };
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+
+        public IEnumerator<AirlineRoute> GetEnumerator()
+        {
+            var asyncEnumerator = GetAsyncEnumerator();
+
+            try
+            {
+                while (asyncEnumerator.MoveNextAsync().GetAwaiter().GetResult())
+                {
+                    yield return asyncEnumerator.Current;
+                }
+            }
+            finally
+            {
+                asyncEnumerator.DisposeAsync().GetAwaiter().GetResult();
             }
         }
     }

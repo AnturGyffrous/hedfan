@@ -2,7 +2,7 @@
 
 namespace Hedfan.Schedules.AirlineRoutes
 {
-    public interface IAsyncAirlineRoutes : IAsyncEnumerable<AirlineRoute>
+    public interface IAsyncAirlineRoutes : IEnumerable<AirlineRoute>, IAsyncEnumerable<AirlineRoute>
     {
     }
 }
