@@ -36,6 +36,8 @@ namespace Hedfan.Schedules.AirlineRoutes
 
             var response = await _httpClient.SendAsync(request, cancellationToken);
 
+            cancellationToken.ThrowIfCancellationRequested();
+
             var doc = new HtmlDocument();
             doc.LoadHtml(await response.Content.ReadAsStringAsync());
             var routeArrayJson = doc.DocumentNode
@@ -49,11 +51,17 @@ namespace Hedfan.Schedules.AirlineRoutes
             foreach (var route in JsonConvert.DeserializeObject<List<EasyJetOriginAirport>>(routeArrayJson)
                 .SelectMany(x => x.ConnectedTo, (o, d) => new { Origin = o, Destination = d }))
             {
+                cancellationToken.ThrowIfCancellationRequested();
+                var origin = await _airportStore.FindByIataAsync(route.Origin.Iata, cancellationToken);
+                cancellationToken.ThrowIfCancellationRequested();
+                var destination = await _airportStore.FindByIataAsync(route.Destination.Iata, cancellationToken);
+                cancellationToken.ThrowIfCancellationRequested();
+
                 yield return new AirlineRoute
                 {
                     Airline = EasyJet,
-                    Origin = await _airportStore.FindByIataAsync(route.Origin.Iata),
-                    Destination = await _airportStore.FindByIataAsync(route.Destination.Iata)
+                    Origin = origin,
+                    Destination = destination
                 };
             }
         }

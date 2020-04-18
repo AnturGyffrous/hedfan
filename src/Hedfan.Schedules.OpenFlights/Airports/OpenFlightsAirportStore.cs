@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Hedfan.Schedules.Airports
@@ -13,8 +14,10 @@ namespace Hedfan.Schedules.Airports
             _airports = airports;
         }
 
-        public Task<Airport> FindByIataAsync(string iata) => Task.FromResult(_airports.FirstOrDefault(x => x.Iata == iata));
+        public Task<Airport> FindByIataAsync(string iata, CancellationToken cancellationToken = new CancellationToken()) =>
+            Task.FromResult(_airports.FirstOrDefault(x => x.Iata == iata));
 
-        public Task<Airport> FindByIcaoAsync(string icao) => Task.FromResult(_airports.FirstOrDefault(x => x.Icao == icao));
+        public Task<Airport> FindByIcaoAsync(string icao, CancellationToken cancellationToken = new CancellationToken()) =>
+            Task.FromResult(_airports.FirstOrDefault(x => x.Icao == icao));
     }
 }

@@ -43,10 +43,10 @@ namespace Hedfan.Tests.Unit.Schedules.AirlineRoutes
 
             var airportStore = _fixture.Freeze<Mock<IAirportStore>>();
             airportStore
-                .Setup(x => x.FindByIataAsync(ExampleAirports.LondonLuton.Iata))
+                .Setup(x => x.FindByIataAsync(ExampleAirports.LondonLuton.Iata, It.IsAny<CancellationToken>()))
                 .ReturnsAsync(ExampleAirports.LondonLuton);
             airportStore
-                .Setup(x => x.FindByIataAsync(ExampleAirports.Glasgow.Iata))
+                .Setup(x => x.FindByIataAsync(ExampleAirports.Glasgow.Iata, It.IsAny<CancellationToken>()))
                 .ReturnsAsync(ExampleAirports.Glasgow);
 
             _fixture.Register<IAirlineRoutes>(() => _fixture.Create<EasyJetRoutePicker>());
