@@ -7,15 +7,15 @@ using Hedfan.Schedules.Properties;
 
 using Newtonsoft.Json;
 
-namespace Hedfan.Schedules.Routes
+namespace Hedfan.Schedules.AirlineRoutes
 {
-    public class EasyJetRoutes : IRoutes
+    public class EasyJetRoutes : IAirlineRoutes
     {
-        private readonly IEnumerable<Route> _routes;
+        private readonly IEnumerable<AirlineRoute> _routes;
 
         public EasyJetRoutes(IAirportStore airportStore)
         {
-            _routes = JsonConvert.DeserializeObject<List<EasyJetOriginAirport>>(Resources.EasyJetRouteData).SelectMany(x => x.ConnectedTo, (o, d) => new Route
+            _routes = JsonConvert.DeserializeObject<List<EasyJetOriginAirport>>(Resources.EasyJetRouteData).SelectMany(x => x.ConnectedTo, (o, d) => new AirlineRoute
             {
                 Origin = airportStore.FindByIataAsync(o.Iata).GetAwaiter().GetResult(),
                 Destination = airportStore.FindByIataAsync(d.Iata).GetAwaiter().GetResult()
@@ -24,6 +24,6 @@ namespace Hedfan.Schedules.Routes
 
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
-        public IEnumerator<Route> GetEnumerator() => _routes.GetEnumerator();
+        public IEnumerator<AirlineRoute> GetEnumerator() => _routes.GetEnumerator();
     }
 }

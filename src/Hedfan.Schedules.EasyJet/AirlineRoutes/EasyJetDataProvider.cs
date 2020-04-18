@@ -10,7 +10,7 @@ using HtmlAgilityPack;
 
 using Newtonsoft.Json;
 
-namespace Hedfan.Schedules.Routes
+namespace Hedfan.Schedules.AirlineRoutes
 {
     public class EasyJetDataProvider : IEasyJetDataProvider
     {
@@ -23,7 +23,7 @@ namespace Hedfan.Schedules.Routes
             _airportStore = airportStore;
         }
 
-        public async Task<IEnumerable<Route>> GetRoutesAsync(HttpClient httpClient)
+        public async Task<IEnumerable<AirlineRoute>> GetRoutesAsync(HttpClient httpClient)
         {
             var request = new HttpRequestMessage(HttpMethod.Get, "http://www.easyjet.com/en/cheap-flights/timetables");
 
@@ -40,7 +40,7 @@ namespace Hedfan.Schedules.Routes
                 .FirstOrDefault();
 
             return JsonConvert.DeserializeObject<List<EasyJetOriginAirport>>(routeArrayJson)
-                .SelectMany(x => x.ConnectedTo, (origin, destination) => new Route
+                .SelectMany(x => x.ConnectedTo, (origin, destination) => new AirlineRoute
                 {
                     Origin = _airportStore.FindByIataAsync(origin.Iata).GetAwaiter().GetResult(),
                     Destination = _airportStore.FindByIataAsync(destination.Iata).GetAwaiter().GetResult()

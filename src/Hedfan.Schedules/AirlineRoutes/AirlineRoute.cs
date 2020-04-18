@@ -1,8 +1,8 @@
 ﻿using Hedfan.Schedules.Airports;
 
-namespace Hedfan.Schedules.Routes
+namespace Hedfan.Schedules.AirlineRoutes
 {
-    public class Route
+    public class AirlineRoute
     {
         public Airport Destination { get; set; }
 

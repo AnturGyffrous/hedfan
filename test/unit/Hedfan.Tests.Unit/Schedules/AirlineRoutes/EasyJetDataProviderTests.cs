@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using AutoFixture;
 using AutoFixture.AutoMoq;
 
-using Hedfan.Schedules.Routes;
+using Hedfan.Schedules.AirlineRoutes;
 using Hedfan.Tests.Unit.Properties;
 
 using Moq;
@@ -15,7 +15,7 @@ using Moq.Protected;
 
 using Xunit;
 
-namespace Hedfan.Tests.Unit.Schedules.Routes
+namespace Hedfan.Tests.Unit.Schedules.AirlineRoutes
 {
     public class EasyJetDataProviderTests
     {

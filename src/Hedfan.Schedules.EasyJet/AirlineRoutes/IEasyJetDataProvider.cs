@@ -2,10 +2,10 @@
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace Hedfan.Schedules.Routes
+namespace Hedfan.Schedules.AirlineRoutes
 {
     public interface IEasyJetDataProvider
     {
-        Task<IEnumerable<Route>> GetRoutesAsync(HttpClient httpClient);
+        Task<IEnumerable<AirlineRoute>> GetRoutesAsync(HttpClient httpClient);
     }
 }
