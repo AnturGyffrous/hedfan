@@ -49,7 +49,7 @@ namespace Hedfan.Tests.Unit.Schedules.AirlineRoutes
                 .Setup(x => x.FindByIataAsync(ExampleAirports.Glasgow.Iata))
                 .ReturnsAsync(ExampleAirports.Glasgow);
 
-            _fixture.Register<IAsyncAirlineRoutes>(() => _fixture.Create<EasyJetRoutePicker>());
+            _fixture.Register<IAirlineRoutes>(() => _fixture.Create<EasyJetRoutePicker>());
         }
 
         private readonly IFixture _fixture;
@@ -66,7 +66,7 @@ namespace Hedfan.Tests.Unit.Schedules.AirlineRoutes
             AirlineRoute result = null;
 
             // Act
-            await foreach (var route in _fixture.Create<IAsyncAirlineRoutes>())
+            await foreach (var route in _fixture.Create<IAirlineRoutes>())
             {
                 if (route.Origin.Iata == ExampleAirports.LondonLuton.Iata && route.Destination.Iata == ExampleAirports.Glasgow.Iata)
                 {
@@ -86,7 +86,7 @@ namespace Hedfan.Tests.Unit.Schedules.AirlineRoutes
         public void GetEnumeratorShouldReturnAllRoutes()
         {
             // Arrange
-            var routes = _fixture.Create<IAsyncAirlineRoutes>();
+            var routes = _fixture.Create<IAirlineRoutes>();
 
             // Act
             var count = routes.Count();
@@ -99,7 +99,7 @@ namespace Hedfan.Tests.Unit.Schedules.AirlineRoutes
         public void GetEnumeratorShouldReturnLondonLutonToGlasgowRoute()
         {
             // Arrange
-            var routes = _fixture.Create<IAsyncAirlineRoutes>();
+            var routes = _fixture.Create<IAirlineRoutes>();
 
             // Act
             var result = routes.First(x => x.Origin.Iata == ExampleAirports.LondonLuton.Iata && x.Destination.Iata == ExampleAirports.Glasgow.Iata);
@@ -114,7 +114,7 @@ namespace Hedfan.Tests.Unit.Schedules.AirlineRoutes
         public void NonGenericGetEnumeratorShouldReturnLondonLutonToGlasgowRoute()
         {
             // Arrange
-            var routes = _fixture.Create<IAsyncAirlineRoutes>() as IEnumerable;
+            var routes = _fixture.Create<IAirlineRoutes>() as IEnumerable;
             AirlineRoute result = null;
 
             // Act

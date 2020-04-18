@@ -14,7 +14,7 @@ using Newtonsoft.Json;
 
 namespace Hedfan.Schedules.AirlineRoutes
 {
-    public class EasyJetRoutePicker : IAsyncAirlineRoutes
+    public class EasyJetRoutePicker : IAirlineRoutes
     {
         private static readonly Airline EasyJet = new Airline { Name = "easyJet", CompanyName = "EasyJet UK Limited", Iata = "U2", Icao = "EZY", Callsign = "EASY" };
 
