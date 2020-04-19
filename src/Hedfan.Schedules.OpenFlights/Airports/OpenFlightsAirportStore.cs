@@ -7,11 +7,11 @@ namespace Hedfan.Schedules.Airports
 {
     public class OpenFlightsAirportStore : IAirportStore
     {
-        private readonly IEnumerable<Airport> _airports;
+        private readonly ICollection<Airport> _airports;
 
         public OpenFlightsAirportStore(IEnumerable<Airport> airports)
         {
-            _airports = airports;
+            _airports = airports.ToArray();
         }
 
         public Task<Airport> FindByIataAsync(string iata, CancellationToken cancellationToken = new CancellationToken()) =>
