@@ -43,6 +43,9 @@ namespace Hedfan.Tests.Unit.Schedules.AirlineRoutes
 
             var airportStore = _fixture.Freeze<Mock<IAirportStore>>();
             airportStore
+                .Setup(x => x.FindByIataAsync(It.IsAny<string>(), It.IsAny<CancellationToken>()))
+                .ReturnsAsync((Airport)null);
+            airportStore
                 .Setup(x => x.FindByIataAsync(ExampleAirports.LondonLuton.Iata, It.IsAny<CancellationToken>()))
                 .ReturnsAsync(ExampleAirports.LondonLuton);
             airportStore
@@ -68,7 +71,7 @@ namespace Hedfan.Tests.Unit.Schedules.AirlineRoutes
             // Act
             await foreach (var route in _fixture.Create<IAirlineRoutes>())
             {
-                if (route.Origin.Iata == ExampleAirports.LondonLuton.Iata && route.Destination.Iata == ExampleAirports.Glasgow.Iata)
+                if (route.Origin?.Iata == ExampleAirports.LondonLuton.Iata && route.Destination?.Iata == ExampleAirports.Glasgow.Iata)
                 {
                     result = route;
                     break;
@@ -102,7 +105,7 @@ namespace Hedfan.Tests.Unit.Schedules.AirlineRoutes
             var routes = _fixture.Create<IAirlineRoutes>();
 
             // Act
-            var result = routes.First(x => x.Origin.Iata == ExampleAirports.LondonLuton.Iata && x.Destination.Iata == ExampleAirports.Glasgow.Iata);
+            var result = routes.First(x => x.Origin?.Iata == ExampleAirports.LondonLuton.Iata && x.Destination?.Iata == ExampleAirports.Glasgow.Iata);
 
             // Assert
             result.Airline.Icao.Should().Be("EZY");
@@ -122,7 +125,7 @@ namespace Hedfan.Tests.Unit.Schedules.AirlineRoutes
             {
                 if (o is AirlineRoute route)
                 {
-                    if (route.Origin.Iata == ExampleAirports.LondonLuton.Iata && route.Destination.Iata == ExampleAirports.Glasgow.Iata)
+                    if (route.Origin?.Iata == ExampleAirports.LondonLuton.Iata && route.Destination?.Iata == ExampleAirports.Glasgow.Iata)
                     {
                         result = route;
                         break;

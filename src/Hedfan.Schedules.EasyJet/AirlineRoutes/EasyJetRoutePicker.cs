@@ -10,6 +10,8 @@ using Hedfan.Schedules.Airports;
 
 using HtmlAgilityPack;
 
+using Microsoft.Extensions.Logging;
+
 using Newtonsoft.Json;
 
 namespace Hedfan.Schedules.AirlineRoutes
@@ -24,10 +26,13 @@ namespace Hedfan.Schedules.AirlineRoutes
 
         private readonly HttpClient _httpClient;
 
-        public EasyJetRoutePicker(IAirportStore airportStore, HttpClient httpClient)
+        private readonly ILogger _logger;
+
+        public EasyJetRoutePicker(IAirportStore airportStore, HttpClient httpClient, ILogger<EasyJetRoutePicker> logger)
         {
             _airportStore = airportStore;
             _httpClient = httpClient;
+            _logger = logger;
         }
 
         public async IAsyncEnumerator<AirlineRoute> GetAsyncEnumerator(CancellationToken cancellationToken = new CancellationToken())
@@ -54,8 +59,17 @@ namespace Hedfan.Schedules.AirlineRoutes
                 cancellationToken.ThrowIfCancellationRequested();
                 var origin = await _airportStore.FindByIataAsync(route.Origin.Iata, cancellationToken);
                 cancellationToken.ThrowIfCancellationRequested();
+                if (origin == null)
+                {
+                    _logger.LogWarning($"Unable to find an airport with the IATA {route.Origin.Iata} for the route {route.Origin.Iata}->{route.Destination.Iata}.");
+                }
+
                 var destination = await _airportStore.FindByIataAsync(route.Destination.Iata, cancellationToken);
                 cancellationToken.ThrowIfCancellationRequested();
+                if (destination == null)
+                {
+                    _logger.LogWarning($"Unable to find an airport with the IATA {route.Destination.Iata} for the route {route.Origin.Iata}->{route.Destination.Iata}.");
+                }
 
                 yield return new AirlineRoute
                 {
