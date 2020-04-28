@@ -48,7 +48,7 @@ namespace Hedfan.Tests.Unit.Schedules.Airports
             Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken);
         }
 
-        private async Task AssertThatStreamCanBeUsedByAirportStore(Stream stream)
+        private static async Task AssertThatStreamCanBeUsedByAirportStore(Stream stream)
         {
             // Arrange
             var reader = new OpenFlightsAirportReader(stream);
