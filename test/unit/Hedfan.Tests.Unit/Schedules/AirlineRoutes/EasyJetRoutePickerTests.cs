@@ -1,7 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -39,7 +41,7 @@ namespace Hedfan.Tests.Unit.Schedules.AirlineRoutes
                     Content = new StringContent(Resources.EasyJetTimetables, Encoding.UTF8, "text/html")
                 });
 
-            _fixture.Register(() => new HttpClient(_fixture.Create<HttpMessageHandler>()));
+            _fixture.Inject(new HttpClient(_fixture.Create<HttpMessageHandler>()));
 
             var airportStore = _fixture.Freeze<Mock<IAirportStore>>();
             airportStore
@@ -111,6 +113,73 @@ namespace Hedfan.Tests.Unit.Schedules.AirlineRoutes
             result.Airline.Icao.Should().Be("EZY");
             result.Origin.Icao.Should().Be(ExampleAirports.LondonLuton.Icao);
             result.Destination.Icao.Should().Be(ExampleAirports.Glasgow.Icao);
+        }
+
+        [Fact]
+        public void GetEnumeratorShouldUseHardcodedUrlToDownloadRoutes()
+        {
+            // Arrange
+            AirlineRoute Act()
+            {
+                return _fixture.Create<IAirlineRoutes>().First(x => x.Origin?.Iata == ExampleAirports.LondonLuton.Iata);
+            }
+
+            // Act
+            var result = Act();
+
+            // Assert
+            result.Should().NotBeNull();
+            _fixture.Create<Mock<HttpMessageHandler>>()
+                .Protected()
+                .As<ISendAsyncProtectedMembers>()
+                .Verify(x => x.SendAsync(
+                    It.Is<HttpRequestMessage>(m => m.RequestUri == new Uri("http://www.easyjet.com/en/cheap-flights/timetables")),
+                    It.IsAny<CancellationToken>()));
+        }
+
+        [Fact]
+        public void GetEnumeratorShouldUseHardcodedUserAgentIfNoneIsSetInClient()
+        {
+            // Arrange
+            AirlineRoute Act()
+            {
+                return _fixture.Create<IAirlineRoutes>().First(x => x.Origin?.Iata == ExampleAirports.LondonLuton.Iata);
+            }
+
+            // Act
+            var result = Act();
+
+            // Assert
+            result.Should().NotBeNull();
+            _fixture.Create<Mock<HttpMessageHandler>>()
+                .Protected()
+                .As<ISendAsyncProtectedMembers>()
+                .Verify(x => x.SendAsync(
+                    It.Is<HttpRequestMessage>(m => m.Headers.UserAgent.ToString().Contains(nameof(EasyJetRoutePicker))),
+                    It.IsAny<CancellationToken>()));
+        }
+
+        [Fact]
+        public void GetEnumeratorShouldUseUserAgentOfClientIfOneIsSet()
+        {
+            // Arrange
+            const string productName = "UnitTest";
+            const string productVersion = "1.0";
+
+            var client = _fixture.Create<HttpClient>();
+            client.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue(productName, productVersion));
+
+            // Act
+            var result = _fixture.Create<IAirlineRoutes>().First(x => x.Origin?.Iata == ExampleAirports.LondonLuton.Iata);
+
+            // Assert
+            result.Should().NotBeNull();
+            _fixture.Create<Mock<HttpMessageHandler>>()
+                .Protected()
+                .As<ISendAsyncProtectedMembers>()
+                .Verify(x => x.SendAsync(
+                    It.Is<HttpRequestMessage>(m => m.Headers.UserAgent.ToString() == $"{productName}/{productVersion}"),
+                    It.IsAny<CancellationToken>()));
         }
 
         [Fact]

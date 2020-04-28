@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text.RegularExpressions;
 using System.Threading;
 
@@ -38,7 +39,13 @@ namespace Hedfan.Schedules.AirlineRoutes
         public async IAsyncEnumerator<AirlineRoute> GetAsyncEnumerator(CancellationToken cancellationToken = new CancellationToken())
         {
             var request = new HttpRequestMessage(HttpMethod.Get, "http://www.easyjet.com/en/cheap-flights/timetables");
-
+            if (!_httpClient.DefaultRequestHeaders.UserAgent.Any())
+            {
+                request.Headers.UserAgent.Add(new ProductInfoHeaderValue(
+                    typeof(EasyJetRoutePicker).FullName,
+                    typeof(EasyJetRoutePicker).Assembly.GetName().Version.ToString()));
+            }
+            
             var response = await _httpClient.SendAsync(request, cancellationToken);
 
             cancellationToken.ThrowIfCancellationRequested();
