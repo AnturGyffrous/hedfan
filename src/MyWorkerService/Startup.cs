@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MyWorkerService.HealthChecks;
 using MyWorkerService.Services;
 
 namespace MyWorkerService
@@ -17,7 +18,7 @@ namespace MyWorkerService
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddHealthChecks();
+            services.AddHealthChecks().AddCheck<MyHealthCheck>(nameof(MyHealthCheck));
             services.AddHostedService<WorkerService>();
         }
 
