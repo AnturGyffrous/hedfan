@@ -35,7 +35,7 @@ namespace MyWorkerService.Services
             }
             finally
             {
-                await Task.WhenAll(_task, Task.Delay(Timeout.Infinite, cancellationToken));
+                await Task.WhenAny(_task, Task.Delay(Timeout.Infinite, cancellationToken));
             }
         }
 
