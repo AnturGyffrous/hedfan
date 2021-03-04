@@ -18,7 +18,7 @@ namespace MyWorkerService
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddHealthChecks().AddCheck<MyHealthCheck>(nameof(MyHealthCheck));
+            services.AddHealthChecks().AddCheck<WorkerServiceHealthCheck>(nameof(WorkerServiceHealthCheck));
             services.AddHostedService<WorkerService>();
         }
 
