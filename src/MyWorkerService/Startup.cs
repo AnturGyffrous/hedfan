@@ -18,6 +18,8 @@ namespace MyWorkerService
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSingleton<WorkerServiceHealthCheck>();
+
             services.AddHealthChecks().AddCheck<WorkerServiceHealthCheck>(nameof(WorkerServiceHealthCheck));
             services.AddHostedService<WorkerService>();
         }
@@ -34,11 +36,7 @@ namespace MyWorkerService
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapHealthChecks("/health");
-                endpoints.MapGet("/", async context =>
-                {
-                    await context.Response.WriteAsync("Hello World!");
-                });
+                endpoints.MapHealthChecks("/");
             });
         }
     }

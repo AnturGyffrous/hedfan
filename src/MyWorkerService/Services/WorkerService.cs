@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using MyWorkerService.HealthChecks;
 
 namespace MyWorkerService.Services
 {
@@ -10,9 +10,12 @@ namespace MyWorkerService.Services
     {
         private readonly ILogger<WorkerService> _logger;
 
-        public WorkerService(ILogger<WorkerService> logger)
+        private readonly WorkerServiceHealthCheck _healthCheck;
+
+        public WorkerService(ILogger<WorkerService> logger, WorkerServiceHealthCheck healthCheck)
         {
             _logger = logger;
+            _healthCheck = healthCheck;
         }
 
         protected override async Task ExecuteAsync(CancellationToken cancellationToken)
@@ -25,11 +28,11 @@ namespace MyWorkerService.Services
 
             while (!cancellationToken.IsCancellationRequested)
             {
+                _healthCheck.Heartbeat();
                 _logger.LogDebug($"{nameof(WorkerService)} is doing work.");
 
-                await Task.Delay(random.Next(10000, 30000), cancellationToken);
+                await Task.Delay(random.Next(1000, 30000), cancellationToken);
             }
-
         }
     }
 }
