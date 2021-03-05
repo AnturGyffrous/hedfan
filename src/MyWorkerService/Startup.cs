@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -37,6 +38,19 @@ namespace MyWorkerService
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapHealthChecks("/");
+                endpoints.MapGet("/stop",
+                    async context =>
+                    {
+                        var workerService = endpoints.ServiceProvider.GetServices<IHostedService>().FirstOrDefault(x => x is WorkerService);
+                        if (workerService != null)
+                        {
+                            var cancellationTokenSource = new CancellationTokenSource();
+                            var task = workerService.StopAsync(CancellationToken.None);
+                            await Task.WhenAny(task, Task.Delay(TimeSpan.FromSeconds(5), CancellationToken.None));
+                            cancellationTokenSource.Cancel();
+                        }
+                        await context.Response.WriteAsync($"Stopped {nameof(WorkerService)}");
+                    });
             });
         }
     }
