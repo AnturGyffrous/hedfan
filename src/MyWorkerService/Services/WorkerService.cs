@@ -31,7 +31,7 @@ namespace MyWorkerService.Services
                 _healthCheck.Heartbeat();
                 _logger.LogDebug($"{nameof(WorkerService)} is doing work.");
 
-                await Task.Delay(random.Next(1000, 30000), cancellationToken);
+                await Task.Delay(20000, cancellationToken);
             }
         }
     }
